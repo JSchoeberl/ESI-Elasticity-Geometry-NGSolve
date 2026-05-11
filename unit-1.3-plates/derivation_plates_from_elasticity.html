@@ -1,0 +1,720 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>8. Plates from 3D elasticity &#8212; ESI mini-course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'unit-1.3-plates/derivation_plates_from_elasticity';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9. Reissner-Mindlin plates with TDNNS" href="reissner_mindlin_plate_tdnns.html" />
+    <link rel="prev" title="7. The MCS method" href="../unit-1.2-Mixed/MCS.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../ESI-minicourse.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ESI mini-course</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../ESI-minicourse.html">
+                    ESI mini-course on Elasticity and Geometry
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Elasticity</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/modeling.html">1. Modeling Elasticity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity2D.html">1.5. Solving nonlinear Elasticity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.1-Modeling/linearized_elasticity.html">2. Linearized elasticity</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/Gallery.html">3. Gallery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity3D.html">3.1. 3D Solid Mechanics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/twisted.html">3.2. Twisted beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/metamaterial.html">3.3. Meta material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/Isoparametric.html">3.4. Isoparametric Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/dynamics.html">3.5. Elastodynamics with Newmark time-stepping</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/mixedmethods.html">4. Mixed Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/MixedLaplace.html">5. Mixed Methods for the Diffusion equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.2-Mixed/TDNNS.html">6. TDNNS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke.html">6.7. Cooke’s membrane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke-hybrid.html">6.8. Hybrid TDNNS for Cooke’s membrane benchmark</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/MCS.html">7. The MCS method</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear plates and shells</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Plates from 3D elasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reissner_mindlin_plate_tdnns.html">9. Reissner-Mindlin plates with TDNNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kirchhoff_love_plate_hhj.html">10. Kirchhoff-Love plates with the Hellan-Herrmann-Johnson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introducing_shells.html">11. Linear shells</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/JSchoeberl/ESI-Elasticity-Geometry-NGSolve" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/unit-1.3-plates/derivation_plates_from_elasticity.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Plates from 3D elasticity</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-model-and-plane-stress-assumption">8.1. 3D model and plane stress assumption</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reissner-mindlin-kinematics">8.2. Reissner-Mindlin kinematics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thickness-scaling">8.3. Thickness scaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kirchhoff-love-limit">8.4. Kirchhoff-Love limit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions-and-physical-quantities">8.5. Boundary conditions and physical quantities</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="plates-from-3d-elasticity">
+<h1><span class="section-number">8. </span>Plates from 3D elasticity<a class="headerlink" href="#plates-from-3d-elasticity" title="Permalink to this heading">#</a></h1>
+<p>This notebook derives the Reissner-Mindlin and Kirchhoff-Love plate models by a dimension reduction of 3D linearized elasticity.
+We start from a thin-walled structure with the small thickness <span class="math notranslate nohighlight">\(t\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\Omega_t = \omega \times (-t/2,t/2), \qquad \omega \subset \mathbb{R}^2,
+\]</div>
+<p>and from the linear elasticity problem: Find <span class="math notranslate nohighlight">\(u\in [H^1(\Omega)]^3\)</span> such that for all <span class="math notranslate nohighlight">\(v\in [H^1(\Omega)]^3\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\int_{\Omega_t} \mathbb{C}\varepsilon(u):\varepsilon(v)\,dx = \int_{\Omega_t} f\cdot v\,dx.
+\]</div>
+<p>The linearized strain tensor is <span class="math notranslate nohighlight">\(\varepsilon(u)\)</span>, and the stress-strain relation is <span class="math notranslate nohighlight">\(\sigma=\mathbb{C}\varepsilon(u)\)</span>. For simplicity, we assume that the structure is clamped at <span class="math notranslate nohighlight">\(\partial\omega\times (-t/2,t/2)\)</span>.</p>
+<section id="d-model-and-plane-stress-assumption">
+<h2><span class="section-number">8.1. </span>3D model and plane stress assumption<a class="headerlink" href="#d-model-and-plane-stress-assumption" title="Permalink to this heading">#</a></h2>
+<p>For isotropic linear elasticity</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{C}\varepsilon = 2\mu\varepsilon + \lambda\operatorname{tr}(\varepsilon)I,
+\qquad
+\mu = \frac{E}{2(1+\nu)},
+\qquad
+\lambda = \frac{E\nu}{(1+\nu)(1-2\nu)}.
+\]</div>
+<p>A plate model describes the midsurface displacement and rotations. One additionally uses the plane-stress assumption</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{33}=0,
+\]</div>
+<p>which removes artificial stiffness in the thickness direction. Eliminating the thickness strain gives the two-dimensional plate elasticity tensor</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{D}A = \frac{E}{1-\nu^2}\left((1-\nu)A + \nu\operatorname{tr}(A)I\right),
+\qquad A\in \mathbb{R}^{2\times 2}_{\rm sym}.
+\]</div>
+</section>
+<section id="reissner-mindlin-kinematics">
+<h2><span class="section-number">8.2. </span>Reissner-Mindlin kinematics<a class="headerlink" href="#reissner-mindlin-kinematics" title="Permalink to this heading">#</a></h2>
+<p>The Reissner-Mindlin ansatz keeps an independent rotation field</p>
+<div class="math notranslate nohighlight">
+\[
+\beta=(\beta_1,\beta_2):\omega\to\mathbb{R}^2
+\]</div>
+<p>and a transverse displacement</p>
+<div class="math notranslate nohighlight">
+\[
+w:\omega\to\mathbb{R}.
+\]</div>
+<p>The 3D displacement is approximated by</p>
+<div class="math notranslate nohighlight">
+\[
+u_1(x,y,z)=-z\beta_1(x,y),\qquad
+u_2(x,y,z)=-z\beta_2(x,y),\qquad
+u_3(x,y,z)=w(x,y).
+\]</div>
+<center>
+<a class="reference internal image-reference" href="../_images/plate_fields.png"><img alt="../_images/plate_fields.png" src="../_images/plate_fields.png" style="width: 250px;" /></a>
+</center>
+<p>The strain tensor then separates into bending and transverse shear contributions:</p>
+<div class="math notranslate nohighlight">
+\[
+\varepsilon_{\alpha\beta}(u) = -z\varepsilon_{\alpha\beta}(\beta),
+\qquad
+2\varepsilon_{\alpha 3}(u) = \partial_\alpha w - \beta_\alpha,
+\qquad \alpha,\beta\in\{1,2\}.
+\]</div>
+<p>Thus the bending strain is given by <span class="math notranslate nohighlight">\(\varepsilon(\beta)\)</span>, while the shear strain is <span class="math notranslate nohighlight">\(\nabla w-\beta\)</span>.</p>
+</section>
+<section id="thickness-scaling">
+<h2><span class="section-number">8.3. </span>Thickness scaling<a class="headerlink" href="#thickness-scaling" title="Permalink to this heading">#</a></h2>
+<p>Integrating through the thickness gives</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{-t/2}^{t/2} z^2\,dz = \frac{t^3}{12},
+\qquad
+\int_{-t/2}^{t/2} 1\,dz = t.
+\]</div>
+<p>Therefore bending scales like <span class="math notranslate nohighlight">\(t^3\)</span>, while transverse shear scales like <span class="math notranslate nohighlight">\(t\)</span>. After a load rescaling and division by <span class="math notranslate nohighlight">\(t^3\)</span>, the weak form of the Reissner-Mindlin problem reads:</p>
+<p>Find <span class="math notranslate nohighlight">\((w,\beta)\in H^1_0(\omega)\times [H^1_0(\omega)]^2\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{12}\int_\omega \mathbb{D}\varepsilon(\beta):\varepsilon(\delta)\,dx
++ \frac{\kappa G}{t^2}\int_\omega (\nabla w-\beta)\cdot(\nabla v-\delta)\,dx
+= \int_\omega f v\,dx
+\]</div>
+<p>for all <span class="math notranslate nohighlight">\((v,\delta)\in H^1_0(\omega)\times [H^1_0(\omega)]^2\)</span>. Here, we denoted the shearing modulus <span class="math notranslate nohighlight">\(G\)</span> and the shear correction factor <span class="math notranslate nohighlight">\(\kappa\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[
+G=\frac{E}{2(1+\nu)},\qquad \kappa= \frac56.
+\]</div>
+<p>We note that the shear correction factor <span class="math notranslate nohighlight">\(\kappa\)</span> does not follow from the derivation but is additionally added to compensate for high-order effects of the shear stresses, which are not constant through the thickness.</p>
+<p>The factor <span class="math notranslate nohighlight">\(t^{-2}\)</span> is the source of potential shear locking for very thin plates.</p>
+</section>
+<section id="kirchhoff-love-limit">
+<h2><span class="section-number">8.4. </span>Kirchhoff-Love limit<a class="headerlink" href="#kirchhoff-love-limit" title="Permalink to this heading">#</a></h2>
+<center>
+<a class="reference internal image-reference" href="../_images/linearized_angle_RM_KL.png"><img alt="../_images/linearized_angle_RM_KL.png" src="../_images/linearized_angle_RM_KL.png" style="width: 400px;" /></a>
+</center>
+<p>The Kirchhoff-Love assumption says that normals to the midsurface remain normal after deformation. In the linearized setting this eliminates the rotation <span class="math notranslate nohighlight">\(\beta\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\nabla w - \beta = 0,
+\qquad \text{hence} \qquad \beta = \nabla w.
+\]</div>
+<p>Inserting this constraint into the bending energy gives the Kirchhoff-Love plate model:</p>
+<p>Find <span class="math notranslate nohighlight">\(w\in H^2_0(\omega)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\int_\omega \mathbb{D}\nabla^2 w : \nabla^2 v\,dx
+= \int_\omega f v\,dx
+\qquad \forall v\in H^2_0(\omega).
+\]</div>
+<p>In strong form this is the fourth-order equation</p>
+<div class="math notranslate nohighlight">
+\[
+\operatorname{div}\operatorname{div}(\mathbb{D}\nabla^2 w)=f.
+\]</div>
+<p>The Kirchhoff-Love plate model does not suffer from shear locking as the shear has been eliminated. However, the costs we have to pay is that we need to discretize a fourth-order problem, which is more challenging.</p>
+</section>
+<section id="boundary-conditions-and-physical-quantities">
+<h2><span class="section-number">8.5. </span>Boundary conditions and physical quantities<a class="headerlink" href="#boundary-conditions-and-physical-quantities" title="Permalink to this heading">#</a></h2>
+<p>For Reissner-Mindlin plates the bending moment and shear force are</p>
+<div class="math notranslate nohighlight">
+\[
+M = \frac{1}{12}\mathbb{D}\varepsilon(\beta),
+\qquad
+Q = \frac{\kappa G}{t^2}(\nabla w-\beta).
+\]</div>
+<p>Typical boundary conditions for the Reissner-Mindlin plate are given by</p>
+<center>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>boundary conditions</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\beta_n\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\beta_t\)</span></p></th>
+<th class="head"><p>resulting conditions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>clamped</p></td>
+<td><p>D</p></td>
+<td><p>D</p></td>
+<td><p>D</p></td>
+<td><p><span class="math notranslate nohighlight">\(w=0\)</span>, <span class="math notranslate nohighlight">\(\beta=0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>free</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p><span class="math notranslate nohighlight">\(Q\cdot n=0\)</span>, <span class="math notranslate nohighlight">\(Mn=0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>hard simply supported</p></td>
+<td><p>D</p></td>
+<td><p>N</p></td>
+<td><p>D</p></td>
+<td><p><span class="math notranslate nohighlight">\(w=0\)</span>, <span class="math notranslate nohighlight">\(n^\top Mn=0\)</span>, <span class="math notranslate nohighlight">\(\beta_t=0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>soft simply supported</p></td>
+<td><p>D</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p><span class="math notranslate nohighlight">\(w=0\)</span>, <span class="math notranslate nohighlight">\(Mn=0\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</center>
+<p>The boundary conditions for the Kirchhoff-Love plate can be summarized with the bending moment <span class="math notranslate nohighlight">\(M = \mathbb{D}\nabla^2 w\)</span> as</p>
+<center>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>boundary conditions</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(w\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\partial_n w\)</span></p></th>
+<th class="head"><p>resulting conditions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>clamped</p></td>
+<td><p>D</p></td>
+<td><p>D</p></td>
+<td><p><span class="math notranslate nohighlight">\(w=0\)</span>, <span class="math notranslate nohighlight">\(\partial_n w=0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>simply supported</p></td>
+<td><p>D</p></td>
+<td><p>N</p></td>
+<td><p><span class="math notranslate nohighlight">\(w=0\)</span>, <span class="math notranslate nohighlight">\(M_{nn}=0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>free</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p><span class="math notranslate nohighlight">\(M_{nn}=0\)</span>, <span class="math notranslate nohighlight">\(\frac{\partial M_{nt}}{\partial t}+\mathrm{div}(M)\cdot n=0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>free (corner condition)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\([\![ M_{nt}]\!]_x = M_{n_1t_1}(x)-M_{n_2t_2}(x)=0\quad \forall x\in \mathcal{V}_{\Gamma_f}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</center>
+<p><span class="math notranslate nohighlight">\(\mathcal{V}_{\Gamma_f}\)</span> denotes the set of corner points where the two adjacent edges belong to <span class="math notranslate nohighlight">\(\Gamma_f\)</span>. Here, <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(t\)</span> denote the outer normal and tangential vector on the plate boundary. Physically, <span class="math notranslate nohighlight">\(M_{nn}:=n^\top M n\)</span> is the normal bending moment, <span class="math notranslate nohighlight">\(\partial_t(t^\top M n) + n^\top\mathrm{div}(M)\)</span> the effective transverse shear force, and <span class="math notranslate nohighlight">\(\sigma_{nt}:=t^\top M n\)</span> the torsion moment. Further, the effective shear force <span class="math notranslate nohighlight">\(Q_{\mathrm{eff}}\)</span> is given by <span class="math notranslate nohighlight">\(Q_{\mathrm{eff}}=-\mathrm{div}(M)\)</span>.</p>
+<p>The mixed methods in the next two notebooks are designed around the physical variables rotations and moments.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./unit-1.3-plates"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../unit-1.2-Mixed/MCS.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>The MCS method</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="reissner_mindlin_plate_tdnns.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Reissner-Mindlin plates with TDNNS</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-model-and-plane-stress-assumption">8.1. 3D model and plane stress assumption</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reissner-mindlin-kinematics">8.2. Reissner-Mindlin kinematics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thickness-scaling">8.3. Thickness scaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kirchhoff-love-limit">8.4. Kirchhoff-Love limit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions-and-physical-quantities">8.5. Boundary conditions and physical quantities</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By M. Neunteufel and J. Schöberl
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
