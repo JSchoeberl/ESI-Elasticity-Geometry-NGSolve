@@ -22,9 +22,6 @@ parts:
           - file: unit-1.1-Modeling/Isoparametric.ipynb
           - file: unit-1.1-Modeling/dynamics.ipynb                      
 
-       
-
-
   - caption: Mixed
     numbered: true
     chapters:
