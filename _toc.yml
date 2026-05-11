@@ -22,7 +22,7 @@ parts:
           - file: unit-1.1-Modeling/Isoparametric.ipynb
           - file: unit-1.1-Modeling/dynamics.ipynb                      
 
-  - caption: Mixed
+  - caption: Mixed methods
     numbered: true
     chapters:
     - file: unit-1.2-Mixed/mixedmethods.ipynb
@@ -31,8 +31,7 @@ parts:
       sections:      
         - file: unit-1.2-Mixed/Cooke.ipynb
         - file: unit-1.2-Mixed/Cooke-hybrid.ipynb
-    
-    - file: unit-1.2-Mixed/MCS.ipynb    
+    - file: unit-1.2-Mixed/SchaeferTurek2d.ipynb
 
   - caption: Linear plates and shells
     numbered: true
