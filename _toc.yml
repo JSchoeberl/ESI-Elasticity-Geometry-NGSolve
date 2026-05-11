@@ -5,5 +5,22 @@ format: jb-book
 root: ESI-minicourse.ipynb
 
 
+parts:
+  - caption: Elasticity
+    numbered: true
+    chapters:
+      - file: unit-1.1-Modeling/modeling
+        sections:
+          - file: unit-1.1-Modeling/elasticity2D.ipynb
+      - file: unit-1.1-Modeling/linearized_elasticity          
+      - file: unit-1.1-Modeling/Gallery
+        sections:
+          - file: unit-1.1-Modeling/elasticity3D.ipynb
+          - file: unit-1.1-Modeling/twisted.ipynb            
+          - file: unit-1.1-Modeling/metamaterial.ipynb
+            title: Meta material
+          - file: unit-1.1-Modeling/Isoparametric.ipynb
+          - file: unit-1.1-Modeling/dynamics.ipynb                      
+
        
 
