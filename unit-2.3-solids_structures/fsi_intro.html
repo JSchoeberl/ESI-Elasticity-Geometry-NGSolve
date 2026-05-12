@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>17. Fluid-structure interaction &#8212; ESI mini-course</title>
+    <title>19. Fluid-structure interaction &#8212; ESI mini-course</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'unit-2.3-solids_structures/fsi_intro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="17.1. Fluid-structure interaction with Taylor-Hood elements" href="fsi_TaylorHood.html" />
-    <link rel="prev" title="16. Nonlinear elasticity with TDNNS and MCS" href="nonlinear_elasticity.html" />
+    <link rel="next" title="19.1. Fluid-structure interaction with Taylor-Hood elements" href="fsi_TaylorHood.html" />
+    <link rel="prev" title="18. Nonlinear elasticity with TDNNS and MCS" href="nonlinear_elasticity.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -207,7 +207,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/kirchhoff_love_plate_hhj.html">10. Kirchhoff-Love plates with the Hellan-Herrmann-Johnson method</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/introducing_shells.html">11. Linear shells</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mapping</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mapping of tensors</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.1-mapping/spacehdiv.html">12. The Function Space H(div)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/tesla-mcs.html">12.3. Tesla Valve</a></li>
@@ -220,14 +220,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../unit-2.1-mapping/basisfunctions.html">13. Basis functions</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://project.inria.fr/ranpdes/files/2026/03/03_Schoeberl.pdf">Talk Paris</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preconditioning+Implementation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.2-preconditioning/preconditioning.html">14. Preconditioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.2-preconditioning/implementing.html">15. Implementing FE</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Nonlinear Solids and Structures</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="linear_RM_shell_TDNNS.html">14. TDNNS method for Reissner-Mindlin shells</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nonlinear_shells.html">15. Nonlinear Koiter and Naghdi shells</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nonlinear_elasticity.html">16. Nonlinear elasticity with TDNNS and MCS</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">17. Fluid-structure interaction</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="fsi_TaylorHood.html">17.1. Fluid-structure interaction with Taylor-Hood elements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fsi_HDiv.html">17.2. Fluid-structure interaction with <span class="math notranslate nohighlight">\(H(\mathrm{div})\)</span>-conforming HDG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_RM_shell_TDNNS.html">16. TDNNS method for Reissner-Mindlin shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nonlinear_shells.html">17. Nonlinear Koiter and Naghdi shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nonlinear_elasticity.html">18. Nonlinear elasticity with TDNNS and MCS</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">19. Fluid-structure interaction</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="fsi_TaylorHood.html">19.1. Fluid-structure interaction with Taylor-Hood elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsi_HDiv.html">19.2. Fluid-structure interaction with <span class="math notranslate nohighlight">\(H(\mathrm{div})\)</span>-conforming HDG</a></li>
 </ul>
 </details></li>
 </ul>
@@ -396,7 +401,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="fluid-structure-interaction">
-<h1><span class="section-number">17. </span>Fluid-structure interaction<a class="headerlink" href="#fluid-structure-interaction" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">19. </span>Fluid-structure interaction<a class="headerlink" href="#fluid-structure-interaction" title="Permalink to this heading">#</a></h1>
 <p>In this notebook we introduce the ingredients of a monolithic fluid-structure interaction (FSI) formulation. The aim is not yet to discuss all implementation details, but to make clear which equations live on which domain, why an Arbitrary Lagrangian Eulerian (ALE) formulation is useful for the fluid, and how the interface conditions enter the weak form. Afterwards, two discretizations of the fluid part are presented:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="fsi_TaylorHood.html"><span class="std std-doc">Taylor-Hood elements</span></a></p></li>
@@ -566,7 +571,7 @@ u_f = u_s=\dot d_s, \qquad d_m=d_s \qquad \text{on } \Gamma_I.
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">16. </span>Nonlinear elasticity with TDNNS and MCS</p>
+        <p class="prev-next-title"><span class="section-number">18. </span>Nonlinear elasticity with TDNNS and MCS</p>
       </div>
     </a>
     <a class="right-next"
@@ -574,7 +579,7 @@ u_f = u_s=\dot d_s, \qquad d_m=d_s \qquad \text{on } \Gamma_I.
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">17.1. </span>Fluid-structure interaction with Taylor-Hood elements</p>
+        <p class="prev-next-title"><span class="section-number">19.1. </span>Fluid-structure interaction with Taylor-Hood elements</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
