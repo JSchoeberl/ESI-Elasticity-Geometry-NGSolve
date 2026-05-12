@@ -1,0 +1,692 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>14. TDNNS method for Reissner-Mindlin shells &#8212; ESI mini-course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="application/vnd.jupyter.widget-state+json">{"state": {"25bce8f2ce124ae396543f13a223b3e4": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": "50vh", "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "100%"}}, "51304b484d1e4db5a3565c719fef2b2a": {"model_name": "WebguiModel", "model_module": "webgui_jupyter_widgets", "model_module_version": "0.2.37", "state": {"_dom_classes": [], "_model_module": "webgui_jupyter_widgets", "_model_module_version": "0.2.37", "_model_name": "WebguiModel", "_view_count": null, "_view_module": "webgui_jupyter_widgets", "_view_module_version": "0.2.37", "_view_name": "WebguiView", "layout": "IPY_MODEL_25bce8f2ce124ae396543f13a223b3e4", "tabbable": null, "tooltip": null, "value": {"gui_settings": {}, "ngsolve_version": "6.2.2604-2-g455d4e659", "mesh_dim": 3, "order2d": 2, "order3d": 2, "draw_vol": false, "draw_surf": true, "objects": [], "deformation": true, "funcdim": 3, "show_wireframe": true, "show_mesh": true, "Bezier_points": ["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"], "edges": ["zcxMPu+Igj8AAAAAAAAAAM3MzD433Ik/AAAAAAAAAACamRk/ukWVPwAAAAAAAAAAzcxMP4Troz8AAAAAAAAAAAAAgD/zBLU/AAAAAAAAAAAAAIA/3SisP5DA3z4AAAAAAACAP55ykj8OzVQ/AAAAAAAAgD8OzVQ/nnKSPwAAAAAAAIA/kMDfPt0orD8AAAAAAACAPwatxyTzBLU/AAAAAAAAAAAyMY0kAACAPwAAAADNzEw+Av2PJO+Igj8AAAAAzczMPpERmCQ33Ik/AAAAAJqZGT8tqKQkukWVPwAAAADNzEw/b9C0JITroz8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAAABxeHM/ejeePgAAAAAAAAAAvRtPPxh5Fj8AAAAAAAAAABh5Fj+9G08/AAAAAAAAAAB6N54+cXhzPwAAAAA=", "zczMPYECgD8AAAAAAAAAAJqZmT4TE4U/AAAAAAAAAAAAAAA/gaaOPwAAAAAAAAAAMzMzPzzkmz8AAAAAAAAAAGZmZj9o8as/AAAAAAAAAAAAAIA/mP20PypUZT4AAAAAAACAPyRGoz9uYiY/AAAAAAAAgD8xk4E/MZOBPwAAAAAAAIA/bmImPyRGoz8AAAAAAACAPypUZT6Y/bQ/AAAAAM3MzD31M40kgQKAPwAAAACamZk+J8qSJBMThT8AAAAAAAAAPz1anSSBpo4/AAAAADMzMz9U9askPOSbPwAAAABmZmY/Aaq9JGjxqz8AAAAAAAAAAJn1fz/xKCI+AAAAAAAAAAB/52Y/n03rPgAAAAAAAAAAJj83PyY/Nz8AAAAAAAAAAJ9N6z5/52Y/AAAAAAAAAADxKCI+mfV/PwAAAAA=", "AAAAAAAAgD8AAAAAAAAAAM3MTD7viII/AAAAAAAAAADNzMw+N9yJPwAAAAAAAAAAmpkZP7pFlT8AAAAAAAAAAM3MTD+E66M/AAAAAAAAAAAAAIA/8wS1PwAAAAAAAAAAAACAP90orD+QwN8+AAAAAAAAgD+ecpI/Ds1UPwAAAAAAAIA/Ds1UP55ykj8AAAAAAACAP5DA3z7dKKw/AAAAAM3MTD4C/Y8k74iCPwAAAADNzMw+kRGYJDfciT8AAAAAmpkZPy2opCS6RZU/AAAAAM3MTD9v0LQkhOujPwAAAAAAAIA/Bq3HJPMEtT8AAAAAAAAAAHF4cz96N54+AAAAAAAAAAC9G08/GHkWPwAAAAAAAAAAGHkWP70bTz8AAAAAAAAAAHo3nj5xeHM/AAAAAAAAAAAyMY0kAACAPwAAAAA="], "Bezier_trig_points": ["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"], "mesh_center": [0.5, 0.7071067811865476, 0.7071067811865476], "mesh_radius": 1.118033988749895, "funcmin": -685940981.861677, "funcmax": 577002111.7082769, "multidim_interpolate": false, "multidim_animate": false, "deformation_scale": 1.0, "autoscale": true, "fullscreen": false}}}}, "version_major": 2, "version_minor": 0}</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script crossorigin="anonymous" data-jupyter-widgets-cdn="https://cdn.jsdelivr.net/npm/" src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@1.0.6/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'unit-2.3-solids_structures/linear_RM_shell_TDNNS';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="15. Nonlinear Koiter and Naghdi shells" href="nonlinear_shells.html" />
+    <link rel="prev" title="13. Basis functions" href="../unit-2.1-mapping/basisfunctions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../ESI-minicourse.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ESI mini-course</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../ESI-minicourse.html">
+                    ESI mini-course on Elasticity and Geometry
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Elasticity</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/modeling.html">1. Modeling Elasticity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity2D.html">1.5. Solving nonlinear Elasticity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.1-Modeling/linearized_elasticity.html">2. Linearized elasticity</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/Gallery.html">3. Gallery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity3D.html">3.1. 3D Solid Mechanics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/twisted.html">3.2. Twisted beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/metamaterial.html">3.3. Meta material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/Isoparametric.html">3.4. Isoparametric Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/dynamics.html">3.5. Elastodynamics with Newmark time-stepping</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/mixedmethods.html">4. Mixed Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/MixedLaplace.html">5. Mixed Methods for the Diffusion equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.2-Mixed/TDNNS.html">6. TDNNS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke.html">6.7. Cooke’s membrane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke-hybrid.html">6.8. Hybrid TDNNS for Cooke’s membrane benchmark</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/SchaeferTurek2d.html">7. Navier-Stokes with MCS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear plates and shells</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/derivation_plates_from_elasticity.html">8. Plates from 3D elasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/reissner_mindlin_plate_tdnns.html">9. Reissner-Mindlin plates with TDNNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/kirchhoff_love_plate_hhj.html">10. Kirchhoff-Love plates with the Hellan-Herrmann-Johnson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/introducing_shells.html">11. Linear shells</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mapping</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.1-mapping/spacehdiv.html">12. The Function Space H(div)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/tesla-mcs.html">12.3. Tesla Valve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/morphing.html">12.4. Navier-Stokes on moving domains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/SurfaceSchaeferTurek.html">12.5. H(div)-conforming Navier-Stokes on Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/heavytop.html">12.6. Heavy top without kinematik constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/rotor.html">12.7. Elastodynamics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.1-mapping/basisfunctions.html">13. Basis functions</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://project.inria.fr/ranpdes/files/2026/03/03_Schoeberl.pdf">Talk Paris</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Nonlinear Solids and Structures</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. TDNNS method for Reissner-Mindlin shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nonlinear_shells.html">15. Nonlinear Koiter and Naghdi shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nonlinear_elasticity.html">16. Nonlinear elasticity with TDNNS and MCS</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="fsi_intro.html">17. Fluid-structure interaction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="fsi_TaylorHood.html">17.1. Fluid-structure interaction with Taylor-Hood elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsi_HDiv.html">17.2. Fluid-structure interaction with <span class="math notranslate nohighlight">\(H(\mathrm{div})\)</span>-conforming HDG</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/JSchoeberl/ESI-Elasticity-Geometry-NGSolve" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/unit-2.3-solids_structures/linear_RM_shell_TDNNS.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>TDNNS method for Reissner-Mindlin shells</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tdnns-method-for-reissner-mindlin-shells">
+<h1><span class="section-number">14. </span>TDNNS method for Reissner-Mindlin shells<a class="headerlink" href="#tdnns-method-for-reissner-mindlin-shells" title="Permalink to this heading">#</a></h1>
+<p>First, we considered linear Kirchhoff-Love shells: membrane plus bending, but no transverse shear. We used the Hellan-Herrmann-Johnson (HHJ) method to handle the bending term through a bending moment tensor.</p>
+<p>We now move to linear Reissner-Mindlin shells by adding shear degrees of freedom on top of the HHJ formulation. This leads to the tangential-displacement-normal-normal-stress (TDNNS) method.</p>
+<p>The additional shear field <span class="math notranslate nohighlight">\(\gamma\)</span> is discretized by <span class="math notranslate nohighlight">\(H(\operatorname{curl})\)</span>-conforming Nédélec elements, yielding a TDNNS discretization.</p>
+<p>The primal energy including shear energy would read</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\mathcal{W}_{\mathrm{RM}}(u,\gamma)=\int_{{\mathcal{S}}}\Big(\frac{t}{2}\|\mathrm{sym}(\nabla_{{\mathcal{S}}}^{\mathrm{cov}}u)\|^2_{\mathbb{C}} + \frac{t^3}{24}\Big\|\sum_{i=1}^3\nabla_{\hat{\mathcal{S}}}^2u_i \hat\nu_i-\nabla_{{\mathcal{S}}}\gamma\Big\|^2_{\mathbb{C}} + \frac{t\kappa G}{2}\|\gamma\|_2^2\Big)\,d s - \int_{{\mathcal{S}}} f\cdot u\,d s,
+\end{align*}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(G=\frac{\bar E}{2(1+\bar\nu)}\)</span> and <span class="math notranslate nohighlight">\(\kappa=5/6\)</span> denote the shear modulus and shear correction factor, respectively.</p>
+<p>Rewriting with the rotation <span class="math notranslate nohighlight">\(\beta = \nabla_{{\mathcal{S}}} u^T\hat\nu+\gamma\)</span>, one obtains the classical formulas for the bending and shear energies</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\frac{t^3}{24}\|\mathrm{sym}(\nabla_{{\mathcal{S}}}^{\mathrm{cov}}\beta)\|^2_{\mathbb{C}},\qquad \frac{t\kappa G}{2}\|\beta - \nabla_{{\mathcal{S}}} u^T\hat\nu\|_2^2.
+\end{align*}
+\]</div>
+<p>However, the hierarchical approach with the shear degrees of freedom is better suited. In the implementation below we keep the hierarchical shear variable <span class="math notranslate nohighlight">\(\gamma\)</span> directly; the rotation <span class="math notranslate nohighlight">\(\beta\)</span> is only used here to connect with the classical Reissner-Mindlin notation.</p>
+<p>We again add the bending moment tensor as unknown giving us the following Lagrangian [<a href="https://doi.org/10.1016/j.compstruc.2024.107543">Neunteufel, Schöberl. The Hellan-Herrmann-Johnson and TDNNS methods for linear and nonlinear shells. <i>Computers &amp; Structures</i>, 305 (2024).</a>]</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\mathcal{L}_{\mathrm{RM}}^{\mathrm{TDNNS}}(u,\sigma,\gamma)&amp;= \int_{{\mathcal{S}}}\Big(\frac{t}{2}\|\mathrm{sym}(\nabla_{{\mathcal{S}}}^{\mathrm{cov}}u)\|^2_{\mathbb{C}} -\frac{6}{t^3}\|\sigma\|^2_{\mathbb{C}^{-1}} + \frac{t\kappa G}{2}\|\gamma\|_2^2\Big)\,d s + \sum_{ T\in{\mathcal{T}}}\int_{ T} \sigma:(\mathcal{H}_{\hat\nu}(u)-\nabla_{{\mathcal{S}}}\gamma)\,d s \\
+&amp;\quad- \sum_{ E\in{\mathcal{E}}}\int_{ E} [\![(\nabla_{{\mathcal{S}}}u)_{\hat\mu\hat\nu}-\gamma_{\hat\mu}]\!]\sigma_{\hat\mu\hat\mu}\,d l- \int_{{\mathcal{S}}} f\cdot u\,d s.
+\end{align*}
+\end{split}\]</div>
+<p>To avoid possible membrane locking we can again add the interpolant into Regge finite elements in the membrane energy term. Due to the hierarchical approach of adding the shear field <span class="math notranslate nohighlight">\(\gamma\)</span>, no shear locking can occur by construction, as the Kirchhoff-Love limit <span class="math notranslate nohighlight">\(\gamma=0\)</span> can always be represented exactly.</p>
+<p>We consider a hyperboloid with free ends as a benchmark example. The shell is described by the equation</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+x^2+y^2 = 1+z^2,\qquad z\in [-1,1]
+\end{align*}
+\]</div>
+<p>It is loaded by a periodic normal surface load <span class="math notranslate nohighlight">\(\hat p=t^3 10^4\cos(2\zeta)\hat\nu\)</span>, <span class="math notranslate nohighlight">\(\zeta\in [0,2\pi)\)</span>. Due to symmetry of the problem, we only consider one eighth of the geometry and prescribe symmetry boundary conditions on the new boundaries. The material parameters read</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\bar{E} = 2.85\times 10^4,\quad \bar{\nu}=0.3.
+\end{align*}
+\]</div>
+<p>The reference values of the hyperboloid benchmark are: <span class="math notranslate nohighlight">\(t=0.1\)</span>: <span class="math notranslate nohighlight">\(-0.18954566\)</span>, <span class="math notranslate nohighlight">\(t=0.01\)</span>: <span class="math notranslate nohighlight">\(-0.15046617\)</span>, <span class="math notranslate nohighlight">\(t=0.001\)</span>: <span class="math notranslate nohighlight">\(-0.1498902\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ngsolve</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">netgen.meshing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">meshing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ngsolve.webgui</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+
+<span class="n">ref_value</span> <span class="o">=</span> <span class="p">{</span><span class="mf">0.1</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.18954566</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.15046617</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.1498902</span><span class="p">}</span>
+<span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">order</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">young_modulus</span> <span class="o">=</span> <span class="mf">2.85e4</span>
+<span class="n">poisson</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">young_modulus</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">poisson</span><span class="p">))</span>
+<span class="n">kappa</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">6</span>
+
+
+<span class="n">symmetry</span> <span class="o">=</span> <span class="s2">&quot;left|top|bottom&quot;</span>
+
+<span class="n">e_n</span> <span class="o">=</span> <span class="o">-</span><span class="n">specialcf</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">force</span> <span class="o">=</span> <span class="mf">1e4</span> <span class="o">*</span> <span class="n">thickness</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">IfPos</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">atan</span><span class="p">(</span><span class="n">z</span> <span class="o">/</span> <span class="n">y</span><span class="p">),</span> <span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">e_n</span> <span class="o">*</span> <span class="n">thickness</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">mapping</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span>
+    <span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">y</span><span class="p">),</span>
+    <span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">y</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">geom</span> <span class="o">=</span> <span class="n">meshing</span><span class="o">.</span><span class="n">SurfaceGeometry</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">GenerateMesh</span><span class="p">(</span><span class="n">quads</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ny</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span><span class="o">.</span><span class="n">Curve</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+
+<span class="c1"># point of interest</span>
+<span class="n">P</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">MaterialStress</span><span class="p">(</span><span class="n">mat</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">young_modulus</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">poisson</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">poisson</span><span class="p">)</span> <span class="o">*</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">poisson</span> <span class="o">*</span> <span class="n">Trace</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span> <span class="o">*</span> <span class="n">Id</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">MaterialStressInv</span><span class="p">(</span><span class="n">mat</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">poisson</span><span class="p">)</span> <span class="o">/</span> <span class="n">young_modulus</span> <span class="o">*</span> <span class="p">(</span><span class="n">mat</span> <span class="o">-</span> <span class="n">poisson</span> <span class="o">/</span> <span class="p">(</span><span class="n">poisson</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">Trace</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span> <span class="o">*</span> <span class="n">Id</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+
+<span class="n">fesU</span> <span class="o">=</span> <span class="n">VectorH1</span><span class="p">(</span>
+    <span class="n">mesh</span><span class="p">,</span>
+    <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+    <span class="n">dirichletx_bbnd</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+    <span class="n">dirichlety_bbnd</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span>
+    <span class="n">dirichletz_bbnd</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fesB</span> <span class="o">=</span> <span class="n">HCurl</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">fesS</span> <span class="o">=</span> <span class="n">HDivDivSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">discontinuous</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fesH</span> <span class="o">=</span> <span class="n">NormalFacetSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dirichlet_bbnd</span><span class="o">=</span><span class="s2">&quot;left|top|bottom&quot;</span><span class="p">)</span>
+<span class="n">fes</span> <span class="o">=</span> <span class="n">fesU</span> <span class="o">*</span> <span class="n">fesB</span> <span class="o">*</span> <span class="n">fesS</span> <span class="o">*</span> <span class="n">fesH</span>
+
+<span class="n">fesRegge</span> <span class="o">=</span> <span class="n">HCurlCurl</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">uh</span><span class="p">),</span> <span class="p">(</span><span class="n">du</span><span class="p">,</span> <span class="n">dgamma</span><span class="p">,</span> <span class="n">dsigma</span><span class="p">,</span> <span class="n">duh</span><span class="p">)</span> <span class="o">=</span> <span class="n">fes</span><span class="o">.</span><span class="n">TnT</span><span class="p">()</span>
+<span class="c1"># Need to take traces as we are on the surface</span>
+<span class="n">sigma</span><span class="p">,</span> <span class="n">dsigma</span><span class="p">,</span> <span class="n">uh</span><span class="p">,</span> <span class="n">duh</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">dgamma</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">sigma</span><span class="o">.</span><span class="n">Trace</span><span class="p">(),</span>
+    <span class="n">dsigma</span><span class="o">.</span><span class="n">Trace</span><span class="p">(),</span>
+    <span class="n">uh</span><span class="o">.</span><span class="n">Trace</span><span class="p">(),</span>
+    <span class="n">duh</span><span class="o">.</span><span class="n">Trace</span><span class="p">(),</span>
+    <span class="n">gamma</span><span class="o">.</span><span class="n">Trace</span><span class="p">(),</span>
+    <span class="n">dgamma</span><span class="o">.</span><span class="n">Trace</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="n">nv</span> <span class="o">=</span> <span class="n">specialcf</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">tv</span> <span class="o">=</span> <span class="n">specialcf</span><span class="o">.</span><span class="n">tangential</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">cnv</span> <span class="o">=</span> <span class="n">Cross</span><span class="p">(</span><span class="n">nv</span><span class="p">,</span> <span class="n">tv</span><span class="p">)</span>
+
+<span class="n">Ptau</span> <span class="o">=</span> <span class="n">Id</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">OuterProduct</span><span class="p">(</span><span class="n">nv</span><span class="p">,</span> <span class="n">nv</span><span class="p">)</span>
+<span class="n">gradu</span> <span class="o">=</span> <span class="n">Grad</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">Trace</span><span class="p">()</span>
+<span class="n">graddu</span> <span class="o">=</span> <span class="n">Grad</span><span class="p">(</span><span class="n">du</span><span class="p">)</span><span class="o">.</span><span class="n">Trace</span><span class="p">()</span>
+
+<span class="n">gf_solution</span> <span class="o">=</span> <span class="n">GridFunction</span><span class="p">(</span><span class="n">fes</span><span class="p">)</span>
+
+<span class="n">Hn</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Operator</span><span class="p">(</span><span class="s2">&quot;hesseboundary&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">trans</span> <span class="o">*</span> <span class="n">nv</span><span class="p">)</span><span class="o">.</span><span class="n">Reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">dHn</span> <span class="o">=</span> <span class="p">(</span><span class="n">du</span><span class="o">.</span><span class="n">Operator</span><span class="p">(</span><span class="s2">&quot;hesseboundary&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">trans</span> <span class="o">*</span> <span class="n">nv</span><span class="p">)</span><span class="o">.</span><span class="n">Reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="n">bfa</span> <span class="o">=</span> <span class="n">BilinearForm</span><span class="p">(</span><span class="n">fes</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">condense</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># membrane part</span>
+<span class="n">bfa</span> <span class="o">+=</span> <span class="p">(</span>
+    <span class="n">thickness</span>
+    <span class="o">*</span> <span class="n">InnerProduct</span><span class="p">(</span>
+        <span class="n">MaterialStress</span><span class="p">(</span><span class="n">Interpolate</span><span class="p">(</span><span class="n">Sym</span><span class="p">(</span><span class="n">Ptau</span> <span class="o">*</span> <span class="n">gradu</span><span class="p">),</span> <span class="n">fesRegge</span><span class="p">)),</span>
+        <span class="n">Interpolate</span><span class="p">(</span><span class="n">Sym</span><span class="p">(</span><span class="n">Ptau</span> <span class="o">*</span> <span class="n">graddu</span><span class="p">),</span> <span class="n">fesRegge</span><span class="p">),</span>
+    <span class="p">)</span>
+<span class="p">)</span> <span class="o">*</span> <span class="n">ds</span>
+<span class="c1"># bending part</span>
+<span class="n">bfa</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">12</span> <span class="o">/</span> <span class="p">(</span><span class="n">thickness</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">InnerProduct</span><span class="p">(</span><span class="n">MaterialStressInv</span><span class="p">(</span><span class="n">sigma</span><span class="p">),</span> <span class="n">dsigma</span><span class="p">))</span> <span class="o">*</span> <span class="n">ds</span>
+<span class="n">bfa</span> <span class="o">+=</span> <span class="p">(</span>
+    <span class="n">InnerProduct</span><span class="p">(</span><span class="n">dsigma</span><span class="p">,</span> <span class="n">Hn</span> <span class="o">-</span> <span class="n">Grad</span><span class="p">(</span><span class="n">gamma</span><span class="p">))</span> <span class="o">+</span> <span class="n">InnerProduct</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">dHn</span> <span class="o">-</span> <span class="n">Grad</span><span class="p">(</span><span class="n">dgamma</span><span class="p">))</span>
+<span class="p">)</span> <span class="o">*</span> <span class="n">ds</span>
+<span class="n">bfa</span> <span class="o">+=</span> <span class="p">(</span>
+    <span class="n">sigma</span><span class="p">[</span><span class="n">cnv</span><span class="p">,</span> <span class="n">cnv</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">duh</span> <span class="o">-</span> <span class="n">graddu</span><span class="p">[</span><span class="n">nv</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">dgamma</span><span class="p">)</span> <span class="o">*</span> <span class="n">cnv</span>
+    <span class="o">+</span> <span class="n">dsigma</span><span class="p">[</span><span class="n">cnv</span><span class="p">,</span> <span class="n">cnv</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">uh</span> <span class="o">-</span> <span class="n">gradu</span><span class="p">[</span><span class="n">nv</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="n">cnv</span>
+<span class="p">)</span> <span class="o">*</span> <span class="n">ds</span><span class="p">(</span><span class="n">element_boundary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># shear part</span>
+<span class="n">bfa</span> <span class="o">+=</span> <span class="p">(</span><span class="n">thickness</span> <span class="o">*</span> <span class="n">kappa</span> <span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="n">InnerProduct</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dgamma</span><span class="p">))</span> <span class="o">*</span> <span class="n">ds</span>
+
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">LinearForm</span><span class="p">(</span><span class="n">force</span> <span class="o">*</span> <span class="n">du</span> <span class="o">*</span> <span class="n">ds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">TaskManager</span><span class="p">():</span>
+    <span class="n">bfa</span><span class="o">.</span><span class="n">Assemble</span><span class="p">()</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">Assemble</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">bfa</span><span class="o">.</span><span class="n">condense</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">vec</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="n">bfa</span><span class="o">.</span><span class="n">harmonic_extension_trans</span> <span class="o">*</span> <span class="n">f</span><span class="o">.</span><span class="n">vec</span>
+        <span class="n">inv</span> <span class="o">=</span> <span class="n">bfa</span><span class="o">.</span><span class="n">mat</span><span class="o">.</span><span class="n">Inverse</span><span class="p">(</span><span class="n">fes</span><span class="o">.</span><span class="n">FreeDofs</span><span class="p">(</span><span class="kc">True</span><span class="p">),</span> <span class="n">inverse</span><span class="o">=</span><span class="s2">&quot;sparsecholesky&quot;</span><span class="p">)</span>
+        <span class="n">gf_solution</span><span class="o">.</span><span class="n">vec</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">inv</span> <span class="o">*</span> <span class="n">f</span><span class="o">.</span><span class="n">vec</span>
+        <span class="n">gf_solution</span><span class="o">.</span><span class="n">vec</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="n">bfa</span><span class="o">.</span><span class="n">harmonic_extension</span> <span class="o">*</span> <span class="n">gf_solution</span><span class="o">.</span><span class="n">vec</span>
+        <span class="n">gf_solution</span><span class="o">.</span><span class="n">vec</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="n">bfa</span><span class="o">.</span><span class="n">inner_solve</span> <span class="o">*</span> <span class="n">f</span><span class="o">.</span><span class="n">vec</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">inv</span> <span class="o">=</span> <span class="n">bfa</span><span class="o">.</span><span class="n">mat</span><span class="o">.</span><span class="n">Inverse</span><span class="p">(</span><span class="n">fes</span><span class="o">.</span><span class="n">FreeDofs</span><span class="p">(),</span> <span class="n">inverse</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">gf_solution</span><span class="o">.</span><span class="n">vec</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">inv</span> <span class="o">*</span> <span class="n">f</span><span class="o">.</span><span class="n">vec</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gf_u</span><span class="p">,</span> <span class="n">gf_gamma</span><span class="p">,</span> <span class="n">gf_sigma</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">gf_solution</span><span class="o">.</span><span class="n">components</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;value = </span><span class="si">{</span><span class="n">gf_u</span><span class="p">(</span><span class="n">mesh</span><span class="p">(</span><span class="o">*</span><span class="n">P</span><span class="p">,</span><span class="w"> </span><span class="n">BND</span><span class="p">))[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">, reference = </span><span class="si">{</span><span class="n">ref_value</span><span class="p">[</span><span class="n">thickness</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">Draw</span><span class="p">(</span><span class="n">gf_u</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">deformation</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>value = 127141284.55148129, reference = -0.1498902
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "51304b484d1e4db5a3565c719fef2b2a"}</script></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./unit-2.3-solids_structures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../unit-2.1-mapping/basisfunctions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Basis functions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="nonlinear_shells.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Nonlinear Koiter and Naghdi shells</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By M. Neunteufel and J. Schöberl
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

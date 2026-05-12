@@ -1,0 +1,637 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>17. Fluid-structure interaction &#8212; ESI mini-course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'unit-2.3-solids_structures/fsi_intro';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="17.1. Fluid-structure interaction with Taylor-Hood elements" href="fsi_TaylorHood.html" />
+    <link rel="prev" title="16. Nonlinear elasticity with TDNNS and MCS" href="nonlinear_elasticity.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../ESI-minicourse.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ESI mini-course</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../ESI-minicourse.html">
+                    ESI mini-course on Elasticity and Geometry
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Elasticity</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/modeling.html">1. Modeling Elasticity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity2D.html">1.5. Solving nonlinear Elasticity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.1-Modeling/linearized_elasticity.html">2. Linearized elasticity</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/Gallery.html">3. Gallery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity3D.html">3.1. 3D Solid Mechanics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/twisted.html">3.2. Twisted beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/metamaterial.html">3.3. Meta material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/Isoparametric.html">3.4. Isoparametric Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/dynamics.html">3.5. Elastodynamics with Newmark time-stepping</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/mixedmethods.html">4. Mixed Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/MixedLaplace.html">5. Mixed Methods for the Diffusion equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.2-Mixed/TDNNS.html">6. TDNNS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke.html">6.7. Cooke’s membrane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke-hybrid.html">6.8. Hybrid TDNNS for Cooke’s membrane benchmark</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/SchaeferTurek2d.html">7. Navier-Stokes with MCS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear plates and shells</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/derivation_plates_from_elasticity.html">8. Plates from 3D elasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/reissner_mindlin_plate_tdnns.html">9. Reissner-Mindlin plates with TDNNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/kirchhoff_love_plate_hhj.html">10. Kirchhoff-Love plates with the Hellan-Herrmann-Johnson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/introducing_shells.html">11. Linear shells</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mapping</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.1-mapping/spacehdiv.html">12. The Function Space H(div)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/tesla-mcs.html">12.3. Tesla Valve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/morphing.html">12.4. Navier-Stokes on moving domains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/SurfaceSchaeferTurek.html">12.5. H(div)-conforming Navier-Stokes on Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/heavytop.html">12.6. Heavy top without kinematik constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/rotor.html">12.7. Elastodynamics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.1-mapping/basisfunctions.html">13. Basis functions</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://project.inria.fr/ranpdes/files/2026/03/03_Schoeberl.pdf">Talk Paris</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Nonlinear Solids and Structures</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="linear_RM_shell_TDNNS.html">14. TDNNS method for Reissner-Mindlin shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nonlinear_shells.html">15. Nonlinear Koiter and Naghdi shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nonlinear_elasticity.html">16. Nonlinear elasticity with TDNNS and MCS</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">17. Fluid-structure interaction</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="fsi_TaylorHood.html">17.1. Fluid-structure interaction with Taylor-Hood elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsi_HDiv.html">17.2. Fluid-structure interaction with <span class="math notranslate nohighlight">\(H(\mathrm{div})\)</span>-conforming HDG</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/JSchoeberl/ESI-Elasticity-Geometry-NGSolve" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/unit-2.3-solids_structures/fsi_intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fluid-structure interaction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fluid-structure-interaction">
+<h1><span class="section-number">17. </span>Fluid-structure interaction<a class="headerlink" href="#fluid-structure-interaction" title="Permalink to this heading">#</a></h1>
+<p>In this notebook we introduce the ingredients of a monolithic fluid-structure interaction (FSI) formulation. The aim is not yet to discuss all implementation details, but to make clear which equations live on which domain, why an Arbitrary Lagrangian Eulerian (ALE) formulation is useful for the fluid, and how the interface conditions enter the weak form. Afterwards, two discretizations of the fluid part are presented:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="fsi_TaylorHood.html"><span class="std std-doc">Taylor-Hood elements</span></a></p></li>
+<li><p><a class="reference internal" href="fsi_HDiv.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(H(\mathrm{div})\)</span>-conforming HDG</span></a></p></li>
+</ul>
+<center>
+<a class="reference internal image-reference" href="../_images/turek_solid_fluid_domain.png"><img alt="../_images/turek_solid_fluid_domain.png" src="../_images/turek_solid_fluid_domain.png" style="width: 420px;" /></a>
+</center> 
+<p>We distinguish three fields:</p>
+<center>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>field</p></th>
+<th class="head"><p>domain</p></th>
+<th class="head"><p>role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(u_f, p_f\)</span></p></td>
+<td><p>fluid</p></td>
+<td><p>fluid velocity and pressure</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(d_s, u_s=\dot d_s\)</span></p></td>
+<td><p>solid</p></td>
+<td><p>solid displacement and solid velocity</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(d_m, w_m=\dot d_m\)</span></p></td>
+<td><p>fluid mesh</p></td>
+<td><p>artificial mesh displacement and mesh velocity for ALE</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</center>
+<p><strong>Equations on fluid and solid</strong></p>
+<p>The Navier-Stokes equations with symmetric stress, velocity <span class="math notranslate nohighlight">\(u_f\)</span>, and pressure <span class="math notranslate nohighlight">\(p_f\)</span> are considered for the fluid part on the current fluid domain:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+&amp;\rho_f\frac{\partial u_f}{\partial t} + \rho_f(u_f\cdot \nabla)u_f -\rho_f\nu_f \mathrm{div}(\nabla u_f^\top+\nabla u_f) + \nabla p_f = f_f,\\
+&amp;\mathrm{div}(u_f) = 0.
+\end{align*}
+\end{split}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\rho_f\)</span> is the fluid density and <span class="math notranslate nohighlight">\(\nu_f\)</span> is the kinematic viscosity. For the solid we use the elastic wave equation in Lagrangian coordinates with displacement <span class="math notranslate nohighlight">\(d_s\)</span> and first Piola-Kirchhoff stress tensor <span class="math notranslate nohighlight">\(P_s=F_s\Sigma_s\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\rho_s\frac{\partial^2 d_s}{\partial t^2} - \mathrm{div}(F_s\Sigma_s) = g_s.
+\end{align*}
+\]</div>
+<p>We consider a St. Venant-Kirchhoff material law</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\Sigma_s = 2\mu_s E_s + \lambda_s \mathrm{tr}(E_s)I,\quad
+F_s = I  + \nabla d_s,\quad
+E_s=\frac{1}{2}(F_s^\top F_s-I),
+\end{align*}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\mu_s\)</span>, <span class="math notranslate nohighlight">\(\lambda_s\)</span> the Lamé parameters.</p>
+<p><strong>Navier-Stokes in ALE (Arbitrary Lagrangian Eulerian) formulation</strong></p>
+<p>The Navier-Stokes equations are given in Eulerian form, whereas the elasticity problem is formulated in Lagrangian coordinates. To couple the two descriptions on one reference configuration, we use an Arbitrary Lagrangian Eulerian form (short ALE) for the fluid part, see e.g. [<a href="https://doi.org/10.1002/0470091355.ecm009">Donea, Huerta, Ponthot, Rodríguez-Ferran. Arbitrary Lagrangian-Eulerian Methods. <i>In: Encyclopedia of Computational Mechanics</i>, 2004</a>].</p>
+<p>We work on a fixed reference fluid domain <span class="math notranslate nohighlight">\(\hat\Omega_f\)</span>. Let
+<span class="math notranslate nohighlight">\(\Phi(\hat x,t)=\hat x+d_m(\hat x,t)\)</span> describe the movement of the fluid mesh, where <span class="math notranslate nohighlight">\(d_m\)</span> is the mesh displacement. The current and reference fluid velocities are related by</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+u_f\circ\Phi=\hat{u}_f.
+\end{align*}
+\]</div>
+<p>The spatial chain rule gives</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\nabla_xu_f\circ\Phi = \nabla_{\hat{x}}\hat{u}_fF_m^{-1},
+\end{align*}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(F_m=\nabla\Phi\)</span> denotes the mesh deformation gradient. For the time derivative at fixed Eulerian position one obtains</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\frac{\partial u_f}{\partial t}\circ\Phi
+= \frac{\partial\hat{u}_f}{\partial t}
+- (\nabla_{\hat{x}}\hat{u}_fF_m^{-1})\,w_m,
+\qquad w_m=\frac{\partial \Phi}{\partial t}=\dot d_m.
+\end{align*}
+\]</div>
+<p>Thus the convective velocity in ALE coordinates is the relative velocity <span class="math notranslate nohighlight">\(\hat u_f-w_m\)</span>. Applying the transformation theorem introduces the Jacobian <span class="math notranslate nohighlight">\(J_m=\det(F_m)\)</span>. The ALE Navier-Stokes equations can then be written in weak form as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+&amp;\int_{\hat\Omega_f}J_m\Big(\rho_f\frac{\partial \hat{u}_f}{\partial t}\cdot\hat{v}
++\rho_f(\nabla_{\hat x}\hat{u}_fF_m^{-1})(\hat{u}_f-w_m)\cdot\hat{v}
++2\rho_f\nu_f \mathrm{sym}(\nabla_{\hat x}\hat{u}_fF_m^{-1}):\mathrm{sym}(\nabla_{\hat x}\hat{v}F_m^{-1})
+-\mathrm{tr}(\nabla_{\hat x}\hat{v}F_m^{-1})p_f\Big)\,d\hat x = 0&amp;&amp;\qquad \forall \hat{v},\\
+&amp;\int_{\hat\Omega_f}J_m\,\mathrm{tr}(\nabla_{\hat x}\hat{u}_fF_m^{-1})q\,d\hat x = 0&amp;&amp;\qquad \forall q.
+\end{align*}
+\end{split}\]</div>
+<p><strong>Elastic wave equation as first order system</strong></p>
+<p>The elastic wave equation does not have to be transformed, since it is already stated in Lagrangian coordinates. We rewrite it as a first order system in time by introducing the solid velocity <span class="math notranslate nohighlight">\(u_s=\dot{d}_s\)</span>. The variational formulation is therefore given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+&amp; \int_{\Omega_s}\frac{\partial d_s}{\partial t}\cdot v \,dX = \int_{\Omega_s}u_s\cdot v\,dX &amp;&amp;\qquad \forall v,\\
+&amp;\int_{\Omega_s}\rho_s\frac{\partial u_s}{\partial t}\cdot w+(F_s\Sigma_s):\nabla w\,dX = 0&amp;&amp;\qquad \forall w.
+\end{align*}
+\end{split}\]</div>
+<p><strong>Interface conditions</strong>
+The interface conditions for fluid-structure interaction have to be considered before we can couple the equations. On the physical interface the fluid velocity equals the solid velocity, while the ALE mesh displacement follows the solid displacement:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+u_f = u_s=\dot d_s, \qquad d_m=d_s \qquad \text{on } \Gamma_I.
+\end{align*}
+\]</div>
+<p>The dynamic condition is balance of traction. In a reference formulation this can be expressed schematically as</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\int_{\Gamma_I} \hat\sigma_f \hat n_f\cdot \hat v_f\,d\hat s
++ \int_{\Gamma_I} P_s n_s\cdot w_s\,dS = 0
+\end{align*}
+\]</div>
+<p>for compatible test functions on the interface. In a monolithic conforming discretization, the interface velocity is represented by the same unknown on both sides. The two interface traction terms then cancel in the summed weak form and the traction balance is imposed naturally.</p>
+<p><strong>Deformation extension into fluid domain</strong></p>
+<p>The last important ingredient is the deformation extension. The mesh displacement <span class="math notranslate nohighlight">\(d_m\)</span> and mesh velocity <span class="math notranslate nohighlight">\(w_m=\dot d_m\)</span> in the ALE Navier-Stokes equations are artificial. They have to be constructed from the solid displacement on the interface.</p>
+<p>A simple approach is to solve a Poisson problem on the fluid domain with <span class="math notranslate nohighlight">\(d_m=d_s\)</span> on the interface and homogeneous Dirichlet conditions on the fixed outer boundary. This is often sufficient for small deformations, but it may lead to poor mesh quality or even inverted elements for larger motions.</p>
+<p>A more robust approach is to solve an auxiliary nonlinear elasticity problem for the fluid mesh. One usually increases the artificial stiffness in sensitive regions and penalizes volume compression, so that elements close to the moving structure do not collapse. In the implementation notebooks below this is realized by a spatially dependent stiffness function <span class="math notranslate nohighlight">\(h(x)\)</span> and a volume-penalizing mesh energy.</p>
+<p>The extension problem is not a physical model for the solid. It only defines the ALE map in the fluid domain. If the extension is solved together with the physical unknowns in a monolithic system, its influence on the physical solid equations is scaled by a small parameter.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./unit-2.3-solids_structures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nonlinear_elasticity.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Nonlinear elasticity with TDNNS and MCS</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="fsi_TaylorHood.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">17.1. </span>Fluid-structure interaction with Taylor-Hood elements</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By M. Neunteufel and J. Schöberl
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
