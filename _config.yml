@@ -48,5 +48,6 @@ parse:
     - amsmath
     - linkify
     - colon_fence
-  myst_dmath_double_inline: true
+  myst_dmath_double_inline: false
+  
   

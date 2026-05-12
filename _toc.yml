@@ -40,3 +40,32 @@ parts:
     - file: unit-1.3-plates/reissner_mindlin_plate_tdnns.ipynb
     - file: unit-1.3-plates/kirchhoff_love_plate_hhj.ipynb
     - file: unit-1.3-plates/introducing_shells.ipynb
+
+
+  - caption: Mapping
+    numbered: true
+    chapters:
+    - file: unit-2.1-mapping/spacehdiv.ipynb
+      sections:      
+        - file: unit-2.1-mapping/tesla-mcs.ipynb
+        - file: unit-2.1-mapping/morphing.ipynb
+        - file: unit-2.1-mapping/SurfaceSchaeferTurek.ipynb
+        - file: unit-2.1-mapping/heavytop.ipynb
+        - file: unit-2.1-mapping/rotor.ipynb
+
+    - file: unit-2.1-mapping/basisfunctions.ipynb
+    - url: https://project.inria.fr/ranpdes/files/2026/03/03_Schoeberl.pdf
+      title: Talk Paris
+    
+
+
+  - caption: Nonlinear Solids and Structures
+    numbered: true
+    chapters:
+      - file: unit-2.3-solids_structures/linear_RM_shell_TDNNS.ipynb
+      - file: unit-2.3-solids_structures/nonlinear_shells.ipynb
+      - file: unit-2.3-solids_structures/nonlinear_elasticity.ipynb
+      - file: unit-2.3-solids_structures/fsi_intro.ipynb
+        sections:
+          - file: unit-2.3-solids_structures/fsi_TaylorHood.ipynb
+          - file: unit-2.3-solids_structures/fsi_HDiv.ipynb
