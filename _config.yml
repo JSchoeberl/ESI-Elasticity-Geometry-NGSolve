@@ -15,7 +15,7 @@ execute:
   execute_notebooks: auto
   timeout: 600
   exclude_patterns:
-        - "plates/*"                        
+        - "unit-2.1-mapping/present_local/*.ipynb"                        
   
 # Define the name of the latex output file for PDF builds
 # latex:

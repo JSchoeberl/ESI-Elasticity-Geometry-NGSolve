@@ -42,7 +42,7 @@ parts:
     - file: unit-1.3-plates/introducing_shells.ipynb
 
 
-  - caption: Mapping
+  - caption: Mapping of tensors
     numbered: true
     chapters:
     - file: unit-2.1-mapping/spacehdiv.ipynb
@@ -57,7 +57,13 @@ parts:
     - url: https://project.inria.fr/ranpdes/files/2026/03/03_Schoeberl.pdf
       title: Talk Paris
     
-
+  - caption: Preconditioning+Implementation
+    numbered: true
+    chapters:
+    - file: unit-2.2-preconditioning/preconditioning.ipynb
+    - file: unit-2.2-preconditioning/implementing.ipynb
+      title: Implementing FE
+  
 
   - caption: Nonlinear Solids and Structures
     numbered: true
