@@ -75,3 +75,23 @@ parts:
         sections:
           - file: unit-2.3-solids_structures/fsi_TaylorHood.ipynb
           - file: unit-2.3-solids_structures/fsi_HDiv.ipynb
+
+  - caption: Extrinsic curvature
+    numbered: true
+    chapters:
+    - file: unit-3.1-extrinsic_curvature/01_ddg_motivation.ipynb
+    - file: unit-3.1-extrinsic_curvature/02_numerical_examples.ipynb
+    - file: unit-3.1-extrinsic_curvature/03_analysis_sketch.ipynb
+
+  - caption: Intrinsic curvature
+    numbered: true
+    chapters:
+    - file: unit-3.2-intrinsic_curvature/01_Gauss_Bonnet.ipynb
+    - file: unit-3.2-intrinsic_curvature/02_riemannian_manifolds.ipynb
+    - file: unit-3.2-intrinsic_curvature/03_regge_metric.ipynb
+    - file: unit-3.2-intrinsic_curvature/04_distributional_gauss_curvature.ipynb
+    - file: unit-3.2-intrinsic_curvature/05_distributional_gauss_curvature_analysis.ipynb
+    - file: unit-3.2-intrinsic_curvature/06_distributional_scalar_curvature.ipynb
+    - file: unit-3.2-intrinsic_curvature/07_distributional_riemann_curvature_tensor.ipynb
+
+
