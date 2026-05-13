@@ -1,0 +1,650 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>27. Distributional Gauss curvature (analysis) &#8212; ESI mini-course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'unit-3.2-intrinsic_curvature/05_distributional_gauss_curvature_analysis';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="28. Distributional scalar curvature" href="06_distributional_scalar_curvature.html" />
+    <link rel="prev" title="26. Distributional Gauss curvature" href="04_distributional_gauss_curvature.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../ESI-minicourse.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ESI mini-course</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../ESI-minicourse.html">
+                    ESI mini-course on Elasticity and Geometry
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Elasticity</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/modeling.html">1. Modeling Elasticity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity2D.html">1.5. Solving nonlinear Elasticity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.1-Modeling/linearized_elasticity.html">2. Linearized elasticity</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/Gallery.html">3. Gallery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity3D.html">3.1. 3D Solid Mechanics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/twisted.html">3.2. Twisted beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/metamaterial.html">3.3. Meta material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/Isoparametric.html">3.4. Isoparametric Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/dynamics.html">3.5. Elastodynamics with Newmark time-stepping</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/mixedmethods.html">4. Mixed Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/MixedLaplace.html">5. Mixed Methods for the Diffusion equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.2-Mixed/TDNNS.html">6. TDNNS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke.html">6.7. Cooke’s membrane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke-hybrid.html">6.8. Hybrid TDNNS for Cooke’s membrane benchmark</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/SchaeferTurek2d.html">7. Navier-Stokes with MCS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear plates and shells</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/derivation_plates_from_elasticity.html">8. Plates from 3D elasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/reissner_mindlin_plate_tdnns.html">9. Reissner-Mindlin plates with TDNNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/kirchhoff_love_plate_hhj.html">10. Kirchhoff-Love plates with the Hellan-Herrmann-Johnson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/introducing_shells.html">11. Linear shells</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mapping of tensors</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.1-mapping/spacehdiv.html">12. The Function Space H(div)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/tesla-mcs.html">12.3. Tesla Valve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/morphing.html">12.4. Navier-Stokes on moving domains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/SurfaceSchaeferTurek.html">12.5. H(div)-conforming Navier-Stokes on Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/heavytop.html">12.6. Heavy top without kinematik constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/rotor.html">12.7. Elastodynamics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.1-mapping/basisfunctions.html">13. Basis functions</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://project.inria.fr/ranpdes/files/2026/03/03_Schoeberl.pdf">Talk Paris</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preconditioning+Implementation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.2-preconditioning/preconditioning.html">14. Preconditioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.2-preconditioning/implementing.html">15. Implementing FE</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Nonlinear Solids and Structures</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/linear_RM_shell_TDNNS.html">16. TDNNS method for Reissner-Mindlin shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/nonlinear_shells.html">17. Nonlinear Koiter and Naghdi shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/nonlinear_elasticity.html">18. Nonlinear elasticity with TDNNS and MCS</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_intro.html">19. Fluid-structure interaction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_TaylorHood.html">19.1. Fluid-structure interaction with Taylor-Hood elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_HDiv.html">19.2. Fluid-structure interaction with <span class="math notranslate nohighlight">\(H(\mathrm{div})\)</span>-conforming HDG</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extrinsic curvature</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.1-extrinsic_curvature/01_ddg_motivation.html">20. Extrinsic Curvature on a Triangulated Surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.1-extrinsic_curvature/02_numerical_examples.html">21. Numerical approximation of extrinsic curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.1-extrinsic_curvature/03_analysis_sketch.html">22. Analysis of the generalized and lifted shape operator</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Intrinsic curvature</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Gauss_Bonnet.html">23. Gauss-Bonnet Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_riemannian_manifolds.html">24. Riemannian Manifolds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_regge_metric.html">25. Regge finite elements and Regge metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_distributional_gauss_curvature.html">26. Distributional Gauss curvature</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">27. Distributional Gauss curvature (analysis)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_distributional_scalar_curvature.html">28. Distributional scalar curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_distributional_riemann_curvature_tensor.html">29. Distributional Riemann curvature tensor curvature</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/JSchoeberl/ESI-Elasticity-Geometry-NGSolve" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/unit-3.2-intrinsic_curvature/05_distributional_gauss_curvature_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Distributional Gauss curvature (analysis)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integral-representation-of-distributional-gauss-curvature">27.1. Integral representation of distributional Gauss curvature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#improved-convergence-rates-by-the-canonical-regge-interpolant">27.2. Improved convergence rates by the canonical Regge interpolant</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="distributional-gauss-curvature-analysis">
+<h1><span class="section-number">27. </span>Distributional Gauss curvature (analysis)<a class="headerlink" href="#distributional-gauss-curvature-analysis" title="Permalink to this heading">#</a></h1>
+<p>After we defined the distributional Gauss curvature and its lifting and observed convergence rates numerically in the <a class="reference internal" href="04_distributional_gauss_curvature.html"><span class="std std-doc">previous notebook</span></a>, we focus in this notebook on the numerical analysis and presenting ideas on how to prove the observed convergence rates.</p>
+<p>The notebook is based on the following works: <a class="reference external" href="https://doi.org/10.1137/19M1255549">Gawlik. <em>High-Order Approximation of Gaussian Curvature with Regge Finite Elements</em>, <em>SIAM Journal on Numerical Analysis</em> (2020).</a>, <a class="reference external" href="https://doi.org/10.1007/s10208-022-09597-1">Berchenko-Kogan, Gawlik. <em>Finite Element Approximation of the Levi-Civita Connection and Its Curvature in Two Dimensions</em>, <em>Found Comput Math</em> (2022)</a>, <a class="reference external" href="https://doi.org/10.5802/smai-jcm.98">Gopalakrishnan, Neunteufel, Schöberl, Wardetzky. <em>Analysis of curvature approximations via covariant curl and incompatibility for Regge metrics</em>, <em>The SMAI Journal of computational mathematics</em> (2023)</a>, and <a class="reference external" href="https://doi.org/10.1016/j.rinam.2024.100511">Gopalakrishnan, Neunteufel, Schöberl, Wardetzky. <em>On the improved convergence of lifted distributional Gauss curvature from Regge elements</em>, <em>Results in Applied Mathematics</em> (2024)</a>.</p>
+<p>The distributional Gauss curvature</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\widetilde{K\,\omega}(\varphi) = \sum_{T\in\mathcal{T}}\int_TK|_T\,\varphi\,\omega|_T+\sum_{E\in\mathcal{E}}\int_E[\![\kappa_g]\!]\,\varphi\,\omega_E+\sum_{V\in\mathcal{V}}\sphericalangle_V\,\varphi(V)
+\end{align*}
+\]</div>
+<p>is highly nonlinear in the metric, making numerical analysis unfeasible in its current form. Fortunately, the distributional Gauss curvature entails an integral representation generalizing the Hellan-Herrmann-Johnson method from the Euclidean to the covariant setting.</p>
+<section id="integral-representation-of-distributional-gauss-curvature">
+<h2><span class="section-number">27.1. </span>Integral representation of distributional Gauss curvature<a class="headerlink" href="#integral-representation-of-distributional-gauss-curvature" title="Permalink to this heading">#</a></h2>
+<p>Christiansen showed in <a class="reference external" href="https://doi.org/10.1007/s00211-011-0394-z">Christiansen. <em>On the linearization of Regge calculus</em>. <em>Numer. Math.</em> (2011).</a> that the linearization of the Einstein-Hilbert integral around the Euclidean metric is the incompatibility operator in 3D. Gawlik investigated in <a class="reference external" href="https://doi.org/10.1137/19M1255549">Gawlik. <em>High-Order Approximation of Gaussian Curvature with Regge Finite Elements</em>, <em>SIAM Journal on Numerical Analysis</em> (2020).</a> the variation of the densitized Gauss curvature around a given general metric. There holds for a smooth metric the following Gateaux derivative in a direction <span class="math notranslate nohighlight">\(\sigma\in C^{\infty}(\Omega,\mathbb{R}^{2\times 2}_{\mathrm{sym}})\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+D_g(K(g)\omega(g))[\sigma]:= \lim\limits_{t\to 0}\frac{K(g+t\sigma)\omega(g+t\sigma)-K(g)\omega(g)}{t} = \frac{1}{2}\mathrm{div}_g\mathrm{div}_g(\mathbb{S}_{g}\sigma)\omega(g),
+\end{align*}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbb{S}_g\sigma = \sigma -\mathrm{tr}_g(\sigma)g\)</span> and subscript <span class="math notranslate nohighlight">\(g\)</span> indicates that covariant differential operators are considered.
+There also holds the following identity with the incompatibility operator</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\mathrm{div}_g\mathrm{div}_g(\mathbb{S}_{g}\sigma)\omega(g) = -\mathrm{inc}_g(\sigma)\omega(g),\qquad \mathrm{inc}_g:=\mathrm{curl}_g\mathrm{curl}_g.
+\end{align*}
+\]</div>
+<p>In the Euclidean case, it would become <span class="math notranslate nohighlight">\(\mathrm{div}\mathrm{div}(\mathbb{S}\sigma)\)</span>. Using <span class="math notranslate nohighlight">\(\sigma_h\in \mathrm{Reg}_h^k\)</span> in the Regge space, <span class="math notranslate nohighlight">\(\mathbb{S}\sigma_h\)</span> becomes normal-normal continuous fitting to the Hellan-Herrmann-Johnson method <a class="reference external" href="https://doi.org/10.1090/S0025-5718-1989-0946601-7">Comodi. <em>The Hellan-Herrmann-Johnson method: some new error estimates and postprocessing</em>. <em>Math. Comp.</em> (1989)</a>, which entails a well-defined distributional version reading for <span class="math notranslate nohighlight">\(u_h\in\mathrm{Lag}^{k+1}\)</span> Lagrange finite elements as test functions</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\langle \mathrm{div}\mathrm{div}(\mathbb{S}\sigma_h),u_h\rangle &amp;= \sum_{T\in\mathcal{T}}\int_T \mathbb{S}\sigma_h : \nabla^2 u_h - \int_{\partial T} (\mathbb{S}\sigma_h)_{nn}\partial_nu_h = \sum_{T\in\mathcal{T}}\int_T \mathbb{S}\sigma_h : \nabla^2 u_h + \int_{\partial T} \sigma_h(t,t)\partial_nu_h\\
+&amp;= \sum_{T\in\mathcal{T}}\int_T \mathrm{div}\mathrm{div}(\mathbb{S}\sigma_h) u_h + \int_{\partial T}\mathrm{div}(\mathbb{S}\sigma)_n\,u_h- (\mathbb{S}\sigma_h)_{nt}\partial_tu_h\\
+&amp;= \sum_{T\in\mathcal{T}}\int_T \mathrm{div}\mathrm{div}(\mathbb{S}\sigma_h) u_h + \int_{\partial T} u_h\,\left(\mathrm{div}(\mathbb{S}\sigma)_n+\partial_t(\mathbb{S}\sigma_h(n,t))\right) + \sum_{V}[\![\sigma_h(n,t)]\!]_Vu_h(V),
+\end{align*}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\([\![\sigma_h(n,t)]\!]_V = \sum_{T\supset V}[\![\sigma_h(n,t)]\!]^T_V\)</span> and <span class="math notranslate nohighlight">\([\![\sigma_h(n,t)]\!]^T_V\)</span> measures the jump of <span class="math notranslate nohighlight">\(\sigma_h(n,t)\)</span> evaluated at the triangle <span class="math notranslate nohighlight">\(T\)</span> between the two edges of the triangle attached to the vertex <span class="math notranslate nohighlight">\(V\)</span>, i.e., <span class="math notranslate nohighlight">\([\![\sigma_h(n,t)]\!]^T_V = \sigma_h(n,t)|_{E_1} -\sigma_h(n,t)|_{E_2}\)</span>.</p>
+<p>Gawlik recognized that the HHJ method could be extended to the covariant case, which motivated to define for <span class="math notranslate nohighlight">\(g\in \mathrm{Reg}_h^k\)</span> the following covariant version</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\langle \mathrm{div}_g\mathrm{div}_g(\mathbb{S}_g\sigma_h)\omega(g),u_h\rangle &amp;= \sum_{T\in\mathcal{T}}\int_T g(\mathbb{S}_g\sigma_h, \nabla_g^2 u_h)\,\omega|_T(g) - \int_{\partial T} (\mathbb{S}_g\sigma_h)_{nn}\partial_nu_h\,\omega_{\partial T}(g)=\sum_{T\in\mathcal{T}}\int_T g(\mathbb{S}_g\sigma_h, \nabla_g^2 u_h)\,\omega|_T(g) + \int_{\partial T} \sigma_h(t,t)\partial_nu_h\,\omega_{\partial T}(g)\\
+&amp;= \sum_{T\in\mathcal{T}}\int_T \mathrm{div}\mathrm{div}(\mathbb{S}\sigma_h) u_h + \int_{\partial T} \mathrm{div}_g(\mathbb{S}_g\sigma)(n)\,u_h-(\mathbb{S}\sigma_h)_{nt}\partial_tu_h\\
+&amp;= \sum_{T\in\mathcal{T}}\int_T \mathrm{div}\mathrm{div}(\mathbb{S}\sigma_h) u_h + \int_{\partial T}u_h\, \left(\mathrm{div}_g(\mathbb{S}_g\sigma)(n)+\partial_t(\mathbb{S}\sigma_h(n,t))\right) + \sum_{V}[\![\sigma_h(n,t)]\!]_Vu_h(V).
+\end{align*}
+\end{split}\]</div>
+<p>It turns out that taking the variations of the jump of the geodesic curvature and the angle defect <a class="reference external" href="https://doi.org/10.1007/s10208-022-09597-1">Berchenko-Kogan, Gawlik. <em>Finite Element Approximation of the Levi-Civita Connection and Its Curvature in Two Dimensions</em>, <em>Found Comput Math</em> (2022)</a> exactly match the terms of the covariant HHJ method</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+D_g(\kappa_g\,\omega_E)[\sigma]=\frac{1}{2}\left( (\mathrm{div}_g(\mathbb{S}_g(\sigma)))(n)+\partial_{t}(\sigma(n,t)) \right)\,\omega_E,\qquad D_g(\sphericalangle_V)[\sigma]=\frac{1}{2}\sum_{T\supset V}[\![\sigma(n,t)]\!]_V^T
+\end{align*}
+\]</div>
+<p>proving that</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+D_g \widetilde{K\omega}(u_h)[\sigma]=\frac{1}{2}b_h(g;\sigma_h,u_h),\qquad b_h(g;\sigma_h,u_h) =\sum_{T\in\mathcal{T}}\int_T g(\mathbb{S}_g\sigma_h, \nabla_g^2 u_h)\,\omega|_T(g) - \int_{\partial T} \sigma_h(t,t)\partial_nu_h\,\omega_{\partial T}(g)
+\end{align*}
+\]</div>
+<p>Noting that the Gauss curvature for the Euclidean metric is zero, we obtain with the main theorem of integration and differentiation the following integral representation of the Gauss curvature</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\widetilde{K\omega}(u_h)= \frac{1}{2}\int_0^1b_h(g(t);\sigma,u_h)\,dt,\qquad g(t) = \delta+t(g_h-\delta),\quad \sigma=\dot{g}(t) = g_h-\delta,
+\end{align*}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\delta\)</span> denotes the Euclidean metric.
+By consistency, the exact Gauss curvature from the smooth, exact metric also fulfils the integral representation. Thus, the error has the following integral representation</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\langle \widetilde{K\omega}(g_h)-K\omega,u_h\rangle = \frac{1}{2}\int_0^1b_h(g(t);\sigma,u_h)\,dt,\qquad g(t) = g+t(g_h-g),\quad \sigma=\dot{g}(t) = g_h-g
+\end{align*}
+\]</div>
+<p>The integrand is linear enough to perform numerical analysis to prove the observed convergence rates. For the details of the (technical) proofs, we refer to the above-mentioned literature.</p>
+</section>
+<section id="improved-convergence-rates-by-the-canonical-regge-interpolant">
+<h2><span class="section-number">27.2. </span>Improved convergence rates by the canonical Regge interpolant<a class="headerlink" href="#improved-convergence-rates-by-the-canonical-regge-interpolant" title="Permalink to this heading">#</a></h2>
+<p>When using the canonical Regge interpolation operator to approximate the metric tensor, i.e. <span class="math notranslate nohighlight">\(g_h=\mathcal{I}^{\mathrm{Reg}^k}g\)</span>, one can achieve one or even two ordesr of convergence more. For <span class="math notranslate nohighlight">\(g_h=\mathcal{I}^{\mathrm{Reg}^{k-1}}g\)</span> and <span class="math notranslate nohighlight">\(K_h\in\mathrm{Lag}^k\)</span> there holds the following convergence rates</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\|K_h-K\|_{L^2}\le C h^{k},\qquad \|K_h-K\|_{H^{-1}}\le C h^{k+1}.
+\end{align*}
+\]</div>
+<p>Using stronger norms is also possible and reduces the rates as usual. The proof’s strategy relies on exploiting the definition of the canonical Regge interpolant that the first <span class="math notranslate nohighlight">\(k+1\)</span> tangential-tangential moments at the edges (starting with the zeroth-order moment) and, for higher-order, some internal moments of <span class="math notranslate nohighlight">\(g\)</span> and <span class="math notranslate nohighlight">\(g_h\)</span> coincide. This allows the extraction of one additional order of convergence. The pretty technical proof can be found in <a class="reference external" href="https://doi.org/10.5802/smai-jcm.98">Gopalakrishnan, Neunteufel, Schöberl, Wardetzky. <em>Analysis of curvature approximations via covariant curl and incompatibility for Regge metrics</em>, <em>The SMAI Journal of computational mathematics</em> (2023)</a>.</p>
+<p>By reducing the polynomial order of <span class="math notranslate nohighlight">\(K_h\)</span> to coincide with the metric’s order, i.e. <span class="math notranslate nohighlight">\(K_h\in \mathrm{Lag}^k\)</span> and <span class="math notranslate nohighlight">\(g_h=\mathcal{I}^{\mathrm{Reg}^k}g\)</span>, under the assumption that <span class="math notranslate nohighlight">\(k&gt;1\)</span>, yields yet another improvement of the convergence rate</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\|K_h-K\|_{L^2}\le C h^{k+1},\qquad \|K_h-K\|_{H^{-1}}\le C h^{k+2},\qquad k&gt;1.
+\end{align*}
+\]</div>
+<p>In fact, one obtains the optimal convergence possible in the <span class="math notranslate nohighlight">\(L^2\)</span>-norm. Again, the key ingredient is the definition of the canonical Regge interpolant. The details can be found in <a class="reference external" href="https://doi.org/10.1016/j.rinam.2024.100511">Gopalakrishnan, Neunteufel, Schöberl, Wardetzky. <em>On the improved convergence of lifted distributional Gauss curvature from Regge elements</em>, <em>Results in Applied Mathematics</em> (2024)</a>. Note that the convergence rates highly depend on the chosen polynomial approximation spaces for <span class="math notranslate nohighlight">\(g_h\)</span> and <span class="math notranslate nohighlight">\(K_h\)</span>, and whether the canonical Regge interpolation operator is used or something else.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./unit-3.2-intrinsic_curvature"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_distributional_gauss_curvature.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">26. </span>Distributional Gauss curvature</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="06_distributional_scalar_curvature.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">28. </span>Distributional scalar curvature</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integral-representation-of-distributional-gauss-curvature">27.1. Integral representation of distributional Gauss curvature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#improved-convergence-rates-by-the-canonical-regge-interpolant">27.2. Improved convergence rates by the canonical Regge interpolant</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By M. Neunteufel and J. Schöberl
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,606 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>24. Riemannian Manifolds &#8212; ESI mini-course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'unit-3.2-intrinsic_curvature/02_riemannian_manifolds';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="25. Regge finite elements and Regge metrics" href="03_regge_metric.html" />
+    <link rel="prev" title="23. Gauss-Bonnet Theorem" href="01_Gauss_Bonnet.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../ESI-minicourse.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ESI mini-course</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../ESI-minicourse.html">
+                    ESI mini-course on Elasticity and Geometry
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Elasticity</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/modeling.html">1. Modeling Elasticity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity2D.html">1.5. Solving nonlinear Elasticity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.1-Modeling/linearized_elasticity.html">2. Linearized elasticity</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/Gallery.html">3. Gallery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity3D.html">3.1. 3D Solid Mechanics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/twisted.html">3.2. Twisted beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/metamaterial.html">3.3. Meta material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/Isoparametric.html">3.4. Isoparametric Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/dynamics.html">3.5. Elastodynamics with Newmark time-stepping</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/mixedmethods.html">4. Mixed Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/MixedLaplace.html">5. Mixed Methods for the Diffusion equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.2-Mixed/TDNNS.html">6. TDNNS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke.html">6.7. Cooke’s membrane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke-hybrid.html">6.8. Hybrid TDNNS for Cooke’s membrane benchmark</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/SchaeferTurek2d.html">7. Navier-Stokes with MCS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear plates and shells</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/derivation_plates_from_elasticity.html">8. Plates from 3D elasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/reissner_mindlin_plate_tdnns.html">9. Reissner-Mindlin plates with TDNNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/kirchhoff_love_plate_hhj.html">10. Kirchhoff-Love plates with the Hellan-Herrmann-Johnson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/introducing_shells.html">11. Linear shells</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mapping of tensors</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.1-mapping/spacehdiv.html">12. The Function Space H(div)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/tesla-mcs.html">12.3. Tesla Valve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/morphing.html">12.4. Navier-Stokes on moving domains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/SurfaceSchaeferTurek.html">12.5. H(div)-conforming Navier-Stokes on Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/heavytop.html">12.6. Heavy top without kinematik constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/rotor.html">12.7. Elastodynamics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.1-mapping/basisfunctions.html">13. Basis functions</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://project.inria.fr/ranpdes/files/2026/03/03_Schoeberl.pdf">Talk Paris</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preconditioning+Implementation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.2-preconditioning/preconditioning.html">14. Preconditioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.2-preconditioning/implementing.html">15. Implementing FE</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Nonlinear Solids and Structures</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/linear_RM_shell_TDNNS.html">16. TDNNS method for Reissner-Mindlin shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/nonlinear_shells.html">17. Nonlinear Koiter and Naghdi shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/nonlinear_elasticity.html">18. Nonlinear elasticity with TDNNS and MCS</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_intro.html">19. Fluid-structure interaction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_TaylorHood.html">19.1. Fluid-structure interaction with Taylor-Hood elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_HDiv.html">19.2. Fluid-structure interaction with <span class="math notranslate nohighlight">\(H(\mathrm{div})\)</span>-conforming HDG</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extrinsic curvature</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.1-extrinsic_curvature/01_ddg_motivation.html">20. Extrinsic Curvature on a Triangulated Surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.1-extrinsic_curvature/02_numerical_examples.html">21. Numerical approximation of extrinsic curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.1-extrinsic_curvature/03_analysis_sketch.html">22. Analysis of the generalized and lifted shape operator</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Intrinsic curvature</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Gauss_Bonnet.html">23. Gauss-Bonnet Theorem</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">24. Riemannian Manifolds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_regge_metric.html">25. Regge finite elements and Regge metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_distributional_gauss_curvature.html">26. Distributional Gauss curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_distributional_gauss_curvature_analysis.html">27. Distributional Gauss curvature (analysis)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_distributional_scalar_curvature.html">28. Distributional scalar curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_distributional_riemann_curvature_tensor.html">29. Distributional Riemann curvature tensor curvature</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/JSchoeberl/ESI-Elasticity-Geometry-NGSolve" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/unit-3.2-intrinsic_curvature/02_riemannian_manifolds.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Riemannian Manifolds</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="riemannian-manifolds">
+<h1><span class="section-number">24. </span>Riemannian Manifolds<a class="headerlink" href="#riemannian-manifolds" title="Permalink to this heading">#</a></h1>
+<p>In this notebook, we recap some basic definitions of Riemannian manifolds, especially the metric tensor, Christoffel symbols, and several curvature quantities.</p>
+<p>Let <span class="math notranslate nohighlight">\((M,g)\)</span> be an <span class="math notranslate nohighlight">\(N\)</span>-dimensional Riemannian manifold with metric tensor <span class="math notranslate nohighlight">\(g\)</span>. That means <span class="math notranslate nohighlight">\(M\)</span> is a smooth manifold, and <span class="math notranslate nohighlight">\(g\)</span> is a symmetric and positive definite bilinear form on the tangent space of <span class="math notranslate nohighlight">\(M\)</span>. If <span class="math notranslate nohighlight">\(g\)</span> has signature <span class="math notranslate nohighlight">\(-+\dots+\)</span>, then <span class="math notranslate nohighlight">\((M,g)\)</span> is called a pseudo-Riemannian manifold. For instance, in general relativity, the metric has the signature <span class="math notranslate nohighlight">\(-+++\)</span>, where the associated negative coordinate corresponds to time. For numerical experiments and simulations we will approximate the exact metric by <a class="reference internal" href="03_regge_metric.html"><span class="std std-doc">Regge finite elements</span></a>.</p>
+<p>For simplicity we assume that <span class="math notranslate nohighlight">\(M\)</span> can be covered by a single chart, inducing local coordinates <span class="math notranslate nohighlight">\(x^1,\dots, x^N\)</span> with basis vectors <span class="math notranslate nohighlight">\(\partial_1,\dots,\partial_N\)</span> (a frame of vector fields <span class="math notranslate nohighlight">\(\partial_i\in \mathfrak{X}(M)\)</span> ), and their corresponding dual basis of 1-forms <span class="math notranslate nohighlight">\(dx^1,\dots, dx^N\)</span>, <span class="math notranslate nohighlight">\(dx^i\in \Lambda^1(M)\)</span>. That means <span class="math notranslate nohighlight">\(dx^i(\partial_j)=\delta^i_{j}\)</span>. Then, we can write the metric <span class="math notranslate nohighlight">\(g\)</span> and its inverse in terms of the coordinates via</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+g_{ij} = g(\partial_i,\partial_j),\qquad g^{ij}= g^{-1}(dx^i,dx^j),\qquad g= g_{ij}dx^i\otimes dx^j,\qquad g^{-1} = g^{ij}\,\partial_i\otimes \partial_j.
+\end{align*}\]</div>
+<p>Note that both <span class="math notranslate nohighlight">\(g_{ij}\)</span> and <span class="math notranslate nohighlight">\(g^{ij}\)</span> are symmetric. We utilized Einstein’s summation convention of repeated indices. That means if an index appears as a subscript and superscript, we implicitly sum over it. The volume form  <span class="math notranslate nohighlight">\(\omega\in \Lambda^N(M)\)</span> used for integration on the manifold can be expressed in coordinates as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\omega = \sqrt{\det (g_{ij})}\,dx^1\wedge\dots\wedge dx^N,
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\wedge:\Lambda^i(M)\times\Lambda^j(M)\to\Lambda^{i+j}(M)\)</span> denotes the wedge-product of two forms.</p>
+<p>The Levi-Civita connection <span class="math notranslate nohighlight">\(\nabla\)</span> is the unique connection that is metric-compatible (Leibnitz rule) and torsion-free, i.e. for all <span class="math notranslate nohighlight">\(X,Y,Z\in\mathfrak{X}(M)\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp; X(g(Y,Z)) = g(\nabla_XY,Z)+ g(Y,\nabla_XZ)\\
+&amp; \nabla_XY -\nabla_YX = [X,Y],
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\([X,Y]\in \mathfrak{X}(M)\)</span> denotes the commutator (Lie-bracket) defined by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+[X,Y]f = X(Y(f))-Y(X(f)),\qquad \forall f\in C^{\infty}(M).
+\end{align*}\]</div>
+<p>The Christoffel symbols of the first and second kinds are defined via</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Gamma_{ijk}= g(\nabla_{\partial_i}\partial_j,\partial_k),\qquad \nabla_{\partial_i}\partial_j=\Gamma_{ij}^k\partial_k
+\end{align*}\]</div>
+<p>and in terms of the metric tensor</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Gamma_{ijk}=\frac{1}{2}\left(\partial_ig_{jk}+\partial_jg_{ik}-\partial_kg_{ij}\right),\qquad \Gamma_{ij}^k = g^{kl}\Gamma_{ijl}.
+\end{align*}\]</div>
+<p>The full fourth-order Riemann curvature tensor, encoding the complete curvature information of the Riemannian manifold <span class="math notranslate nohighlight">\(M\)</span>, is given by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathfrak{R}(X,Y,Z,W) = g(\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z,W),\qquad  \mathfrak{R}_{ijkl} = \partial_i \Gamma_{jkl}-\partial_j \Gamma_{ikl} + \Gamma_{ik}^p\Gamma_{jlp}- \Gamma_{jk}^p\Gamma_{ilp}.
+\end{align*}\]</div>
+<p>The Riemann curvature tensor is skew-symmetric in its first two and second two components and symmetric when switching the first two with the second two indices. Further, there holds the first (algebraic) and second (differential) Bianchi identity</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp;\mathfrak{R}(X,Y,Z,W)=-\mathfrak{R}(Y,X,Z,W)=-\mathfrak{R}(X,Y,W,Z)= \mathfrak{R}(Z,W,X,Y),\\
+&amp;\mathfrak{R}(X,Y,Z,W)+\mathfrak{R}(X,Z,W,Y)+\mathfrak{R}(X,W,Y,Z)=0,\\
+&amp;\nabla_V\mathfrak{R}(X,Y,Z,W)+\nabla_Z\mathfrak{R}(X,Y,W,V)+\nabla_W\mathfrak{R}(X,Y,V,Z)=0.
+\end{align*}\]</div>
+<p>Note that there exist two different sign conventions for the Riemann curvature tensor! The Ricci curvature tensor coincides in both conventions and reads (in our convention)</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathrm{Ric}_{ij} = \mathfrak{R}_{kijl}g^{kl},
+\end{align*}\]</div>
+<p>i.e., the first and last indices are contracted (in the other convention, the first and third indices get contracted). A second contraction gives the scalar curvature</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+S = \mathrm{Ric}_{ij} g^{ij} = \mathfrak{R}_{kijl}g^{kl}g^{ij}.
+\end{align*}\]</div>
+<p>In two dimensions, the Gauss curvature is given for any linear independent <span class="math notranslate nohighlight">\(X,Y\)</span> by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+K = \frac{\mathcal{R}(X,Y,Y,X)}{g(X,X)g(Y,Y)-g(X,Y)^2},
+\end{align*}\]</div>
+<p>which is independent of the choice of <span class="math notranslate nohighlight">\(X,Y\)</span>. Further, it is related to the scalar curvature by <span class="math notranslate nohighlight">\(S=2K\)</span>.</p>
+<p>The notation of Gauss curvature can be extended to arbitrary dimensions considering a plane spanned by two independent vectors <span class="math notranslate nohighlight">\(X,Y\)</span>. The result is denoted as the sectional curvature <span class="math notranslate nohighlight">\(K(X,Y)\)</span>.</p>
+<p>The Einstein tensor, which is zero in two dimensions but in general non-zero for dimensions greater than 2, is defined by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+G_{ij}=\mathrm{Ric}_{ij}-\frac{1}{2}S\,g_{ij}.
+\end{align*}\]</div>
+<p>On a codimension 1 manifold <span class="math notranslate nohighlight">\(F\)</span> (also called hyper-surface), the second fundamental form <span class="math notranslate nohighlight">\(I\!I\)</span> acting on vector fields on the hyper-surface is defined by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+I\!I^n(X,Y)= g(n,\nabla_XY)=-g(\nabla_Xn,Y),\qquad X,Y\in \mathfrak{X}(F),
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> denotes a <span class="math notranslate nohighlight">\(g\)</span>-normalized normal vector on <span class="math notranslate nohighlight">\(F\)</span>. Again, the sign may depend on the convention (changing the normal vector’s direction changes the sign). The second fundamental form is symmetric. In two dimensions, the second fundamental form reduces to the geodesic curvature of a curve</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\kappa^n_g = g(\nabla_tt,n)=-g(\nabla_tn,t),
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(t\)</span> is a <span class="math notranslate nohighlight">\(g\)</span>-normalized tangent vector.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./unit-3.2-intrinsic_curvature"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_Gauss_Bonnet.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">23. </span>Gauss-Bonnet Theorem</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_regge_metric.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">25. </span>Regge finite elements and Regge metrics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By M. Neunteufel and J. Schöberl
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

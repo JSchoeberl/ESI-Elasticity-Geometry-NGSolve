@@ -236,6 +236,22 @@
 </ul>
 </details></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extrinsic curvature</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.1-extrinsic_curvature/01_ddg_motivation.html">20. Extrinsic Curvature on a Triangulated Surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.1-extrinsic_curvature/02_numerical_examples.html">21. Numerical approximation of extrinsic curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.1-extrinsic_curvature/03_analysis_sketch.html">22. Analysis of the generalized and lifted shape operator</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Intrinsic curvature</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/01_Gauss_Bonnet.html">23. Gauss-Bonnet Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/02_riemannian_manifolds.html">24. Riemannian Manifolds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/03_regge_metric.html">25. Regge finite elements and Regge metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/04_distributional_gauss_curvature.html">26. Distributional Gauss curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/05_distributional_gauss_curvature_analysis.html">27. Distributional Gauss curvature (analysis)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/06_distributional_scalar_curvature.html">28. Distributional scalar curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/07_distributional_riemann_curvature_tensor.html">29. Distributional Riemann curvature tensor curvature</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -463,10 +479,17 @@ a(u, v) = \int_S (\nabla_T u)^{sym} : (\nabla_T v)^{sym}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "bb20fb3f8a674b0f9bc463ee78584e37", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "aad7a3caad3b46b19612c809ee88907a", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span><span class="o">.</span><span class="n">GetBBoundaries</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;inflow&#39;, &#39;dummyedge&#39;, &#39;outflow&#39;, &#39;cyl&#39;)
 </pre></div>
 </div>
 </div>
@@ -550,6 +573,11 @@ a(u, v) = \int_S (\nabla_T u)^{sym} : (\nabla_T v)^{sym}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: kwarg &#39;orderface&#39; is an undocumented flags option for class &lt;class &#39;ngsolve.comp.HCurl&#39;&gt;, maybe there is a typo?
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "92d33a353313461c9d1a3a4c18665d76", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -599,6 +627,8 @@ a(u, v) = \int_S (\nabla_T u)^{sym} : (\nabla_T v)^{sym}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3ef7e4da0cc2409292377e008e8c8dfa", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "5af75e8e000443829149d87bf84a5257", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <p>Kelvin Helmholz on the sphere:</p>
 <a class="reference internal image-reference" href="../../_images/61.png"><img alt="tesla" class="align-center" src="../../_images/61.png" style="width: 1000px;" /></a>

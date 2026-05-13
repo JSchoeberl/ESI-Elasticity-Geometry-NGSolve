@@ -236,6 +236,22 @@
 </ul>
 </details></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extrinsic curvature</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.1-extrinsic_curvature/01_ddg_motivation.html">20. Extrinsic Curvature on a Triangulated Surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.1-extrinsic_curvature/02_numerical_examples.html">21. Numerical approximation of extrinsic curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.1-extrinsic_curvature/03_analysis_sketch.html">22. Analysis of the generalized and lifted shape operator</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Intrinsic curvature</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/01_Gauss_Bonnet.html">23. Gauss-Bonnet Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/02_riemannian_manifolds.html">24. Riemannian Manifolds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/03_regge_metric.html">25. Regge finite elements and Regge metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/04_distributional_gauss_curvature.html">26. Distributional Gauss curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/05_distributional_gauss_curvature_analysis.html">27. Distributional Gauss curvature (analysis)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/06_distributional_scalar_curvature.html">28. Distributional scalar curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../unit-3.2-intrinsic_curvature/07_distributional_riemann_curvature_tensor.html">29. Distributional Riemann curvature tensor curvature</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -520,6 +536,8 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "adf4781476a1421aaf276a224f4c5ae1", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <p>Apply volume force to the left or to the right, compute mass flow.</p>
 <div class="cell docutils container">
@@ -563,6 +581,11 @@ $<span class="math notranslate nohighlight">\(
 
 <span class="k">def</span><span class="w"> </span><span class="nf">Skew2Vec</span><span class="p">(</span><span class="n">m</span><span class="p">):</span> 
     <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ndof: 25074
 </pre></div>
 </div>
 </div>
@@ -696,6 +719,8 @@ $<span class="math notranslate nohighlight">\(
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d20973912a914f7088c1f8265bd67310", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "e35d3ae20ebb4eb9918df5a655c996f9", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <p>In the following plots we can see the solutions at <span class="math notranslate nohighlight">\(t = T_{end}\)</span>. We observe that for the flow from left to right the solution is much more turbulent and the valve is “activated” since the fluid stops it self. On the other hand, for the flow from right to left, the solution is nearly laminar and much faster. This can also be observed in the  the maxs flux ploted over time below.</p>
 <div class="cell docutils container">
@@ -709,6 +734,8 @@ $<span class="math notranslate nohighlight">\(
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "380ef884f84d413ea9601fcc5805e781", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "eed9524b6e83446da3c4b309d05fe29d", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -727,6 +754,9 @@ $<span class="math notranslate nohighlight">\(
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0b6141d6c14693a910ea7f67cc68986575677e99b126c39613d112a6ad44153f.png" src="../../_images/0b6141d6c14693a910ea7f67cc68986575677e99b126c39613d112a6ad44153f.png" />
 </div>
 </div>
 </section>

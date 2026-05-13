@@ -1,0 +1,1245 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>21. Numerical approximation of extrinsic curvature &#8212; ESI mini-course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'unit-3.1-extrinsic_curvature/02_numerical_examples';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="22. Analysis of the generalized and lifted shape operator" href="03_analysis_sketch.html" />
+    <link rel="prev" title="20. Extrinsic Curvature on a Triangulated Surface" href="01_ddg_motivation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../ESI-minicourse.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ESI mini-course</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../ESI-minicourse.html">
+                    ESI mini-course on Elasticity and Geometry
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Elasticity</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/modeling.html">1. Modeling Elasticity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity2D.html">1.5. Solving nonlinear Elasticity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.1-Modeling/linearized_elasticity.html">2. Linearized elasticity</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/Gallery.html">3. Gallery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity3D.html">3.1. 3D Solid Mechanics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/twisted.html">3.2. Twisted beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/metamaterial.html">3.3. Meta material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/Isoparametric.html">3.4. Isoparametric Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/dynamics.html">3.5. Elastodynamics with Newmark time-stepping</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/mixedmethods.html">4. Mixed Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/MixedLaplace.html">5. Mixed Methods for the Diffusion equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.2-Mixed/TDNNS.html">6. TDNNS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke.html">6.7. Cooke’s membrane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke-hybrid.html">6.8. Hybrid TDNNS for Cooke’s membrane benchmark</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/SchaeferTurek2d.html">7. Navier-Stokes with MCS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear plates and shells</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/derivation_plates_from_elasticity.html">8. Plates from 3D elasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/reissner_mindlin_plate_tdnns.html">9. Reissner-Mindlin plates with TDNNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/kirchhoff_love_plate_hhj.html">10. Kirchhoff-Love plates with the Hellan-Herrmann-Johnson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/introducing_shells.html">11. Linear shells</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mapping of tensors</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.1-mapping/spacehdiv.html">12. The Function Space H(div)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/tesla-mcs.html">12.3. Tesla Valve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/morphing.html">12.4. Navier-Stokes on moving domains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/SurfaceSchaeferTurek.html">12.5. H(div)-conforming Navier-Stokes on Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/heavytop.html">12.6. Heavy top without kinematik constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/rotor.html">12.7. Elastodynamics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.1-mapping/basisfunctions.html">13. Basis functions</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://project.inria.fr/ranpdes/files/2026/03/03_Schoeberl.pdf">Talk Paris</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preconditioning+Implementation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.2-preconditioning/preconditioning.html">14. Preconditioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.2-preconditioning/implementing.html">15. Implementing FE</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Nonlinear Solids and Structures</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/linear_RM_shell_TDNNS.html">16. TDNNS method for Reissner-Mindlin shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/nonlinear_shells.html">17. Nonlinear Koiter and Naghdi shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/nonlinear_elasticity.html">18. Nonlinear elasticity with TDNNS and MCS</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_intro.html">19. Fluid-structure interaction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_TaylorHood.html">19.1. Fluid-structure interaction with Taylor-Hood elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_HDiv.html">19.2. Fluid-structure interaction with <span class="math notranslate nohighlight">\(H(\mathrm{div})\)</span>-conforming HDG</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extrinsic curvature</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_ddg_motivation.html">20. Extrinsic Curvature on a Triangulated Surface</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">21. Numerical approximation of extrinsic curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_analysis_sketch.html">22. Analysis of the generalized and lifted shape operator</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Intrinsic curvature</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/01_Gauss_Bonnet.html">23. Gauss-Bonnet Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/02_riemannian_manifolds.html">24. Riemannian Manifolds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/03_regge_metric.html">25. Regge finite elements and Regge metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/04_distributional_gauss_curvature.html">26. Distributional Gauss curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/05_distributional_gauss_curvature_analysis.html">27. Distributional Gauss curvature (analysis)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/06_distributional_scalar_curvature.html">28. Distributional scalar curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/07_distributional_riemann_curvature_tensor.html">29. Distributional Riemann curvature tensor curvature</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/JSchoeberl/ESI-Elasticity-Geometry-NGSolve" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/unit-3.1-extrinsic_curvature/02_numerical_examples.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Numerical approximation of extrinsic curvature</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvature-lifting-and-convergence-helpers">21.1. Curvature, lifting, and convergence helpers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometry-generators">21.2. Geometry generators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-settings">21.3. Experiment settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#half-sphere">21.4. Half sphere</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ellipsoid-part">21.5. Ellipsoid part</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperboloid">21.6. Hyperboloid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudosphere">21.7. Pseudosphere</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catenoid">21.8. Catenoid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#torus">21.9. Torus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cylinder">21.10. Cylinder</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="numerical-approximation-of-extrinsic-curvature">
+<h1><span class="section-number">21. </span>Numerical approximation of extrinsic curvature<a class="headerlink" href="#numerical-approximation-of-extrinsic-curvature" title="Permalink to this heading">#</a></h1>
+<p>In this notebook we test the convergence of the lifted generalized Weingarten tensor for several geometries. The geometries are generated by plain functions so the construction is visible: first the reference domain, then the embedding, then the exact normal and Weingarten tensor used for the error computation.</p>
+<style>
+.curv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; align-items: start; }
+.curv-fig { margin: 0; }
+.curv-fig img { width: 100%; border-radius: 6px; }
+.curv-fig figcaption { font-size: 0.9rem; color: #555; margin-top: 0.35rem; }
+.curv-callout { border-left: 4px solid #386cb0; padding: 0.65rem 0.9rem; background: #f6f8fb; margin: 1rem 0; }
+.curv-eqbox { border: 1px solid #d6dbe6; border-radius: 6px; padding: 0.8rem 1rem; background: #fbfcff; }
+</style>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">netgen.occ</span><span class="w"> </span><span class="kn">import</span> <span class="n">OCCGeometry</span><span class="p">,</span> <span class="n">Circle</span><span class="p">,</span> <span class="n">MoveTo</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Rectangle</span><span class="p">,</span> <span class="n">IdentificationType</span><span class="p">,</span> <span class="n">gp_Trsf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ngsolve</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ngsolve.krylovspace</span><span class="w"> </span><span class="kn">import</span> <span class="n">CGSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ngsolve.webgui</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="curvature-lifting-and-convergence-helpers">
+<h2><span class="section-number">21.1. </span>Curvature, lifting, and convergence helpers<a class="headerlink" href="#curvature-lifting-and-convergence-helpers" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">exact_weingarten_from_normal</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">),</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">Id</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">OuterProduct</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">normal</span><span class="p">)</span>
+    <span class="n">Dnormal</span> <span class="o">=</span> <span class="n">CF</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">normal</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">),</span> <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">transpose</span><span class="p">:</span>
+        <span class="n">Dnormal</span> <span class="o">=</span> <span class="n">Dnormal</span><span class="o">.</span><span class="n">trans</span>
+    <span class="k">return</span> <span class="n">P</span> <span class="o">*</span> <span class="n">Dnormal</span> <span class="o">*</span> <span class="n">P</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_lifted_shape_operator</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">dirichlet</span><span class="o">=</span><span class="s2">&quot;.*&quot;</span><span class="p">,</span> <span class="n">K_ex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">neumann</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">nv_ex</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">order</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Order must be at least 1&quot;</span><span class="p">)</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="n">specialcf</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">specialcf</span><span class="o">.</span><span class="n">tangential</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">Cross</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+    <span class="n">ind_neumann</span> <span class="o">=</span> <span class="n">GridFunction</span><span class="p">(</span><span class="n">FacetSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">ind_neumann</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">definedon</span><span class="o">=</span><span class="n">mesh</span><span class="o">.</span><span class="n">BBoundaries</span><span class="p">(</span><span class="n">neumann</span><span class="p">))</span>
+
+    <span class="n">gf_average_nv</span> <span class="o">=</span> <span class="n">GridFunction</span><span class="p">(</span><span class="n">VectorFacetSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">gf_average_nv</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">definedon</span><span class="o">=</span><span class="n">mesh</span><span class="o">.</span><span class="n">Boundaries</span><span class="p">(</span><span class="s2">&quot;.*&quot;</span><span class="p">))</span>
+    <span class="n">cf_average_nv</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">gf_average_nv</span><span class="p">)</span>
+
+    <span class="n">fes</span> <span class="o">=</span> <span class="n">Periodic</span><span class="p">(</span><span class="n">HDivDivSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dirichlet_bbnd</span><span class="o">=</span><span class="n">dirichlet</span><span class="p">))</span>
+    <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span> <span class="o">=</span> <span class="n">fes</span><span class="o">.</span><span class="n">TnT</span><span class="p">()</span>
+    <span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span> <span class="o">=</span> <span class="n">sigma</span><span class="o">.</span><span class="n">Trace</span><span class="p">(),</span> <span class="n">tau</span><span class="o">.</span><span class="n">Trace</span><span class="p">()</span>
+
+    <span class="n">mass</span> <span class="o">=</span> <span class="n">BilinearForm</span><span class="p">(</span>
+        <span class="n">InnerProduct</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span> <span class="o">*</span> <span class="n">ds</span><span class="p">,</span>
+        <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">symmetric_storage</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">condense</span><span class="o">=</span><span class="n">order</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">rhs</span> <span class="o">=</span> <span class="n">LinearForm</span><span class="p">(</span><span class="n">fes</span><span class="p">)</span>
+    <span class="n">rhs</span> <span class="o">+=</span> <span class="n">InnerProduct</span><span class="p">(</span><span class="n">Grad</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">tau</span><span class="p">)</span> <span class="o">*</span> <span class="n">ds</span>
+    <span class="n">rhs</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ind_neumann</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">acos</span><span class="p">(</span><span class="n">cf_average_nv</span> <span class="o">*</span> <span class="n">mu</span><span class="p">))</span> <span class="o">*</span> <span class="n">tau</span><span class="p">[</span><span class="n">mu</span><span class="p">,</span> <span class="n">mu</span><span class="p">]</span> <span class="o">*</span> <span class="n">ds</span><span class="p">(</span><span class="n">element_boundary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">nv_ex</span><span class="p">:</span>
+        <span class="n">rhs</span> <span class="o">+=</span> <span class="o">-</span><span class="n">ind_neumann</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">nv_ex</span><span class="p">)</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">tau</span><span class="p">[</span><span class="n">mu</span><span class="p">,</span> <span class="n">mu</span><span class="p">]</span> <span class="o">*</span> <span class="n">ds</span><span class="p">(</span><span class="n">element_boundary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">gf_kappa</span> <span class="o">=</span> <span class="n">GridFunction</span><span class="p">(</span><span class="n">fes</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">K_ex</span><span class="p">:</span>
+        <span class="n">gf_kappa</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">K_ex</span><span class="p">,</span> <span class="n">definedon</span><span class="o">=</span><span class="n">mesh</span><span class="o">.</span><span class="n">Boundaries</span><span class="p">(</span><span class="s2">&quot;.*&quot;</span><span class="p">),</span> <span class="n">dual</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">pre</span> <span class="o">=</span> <span class="n">Preconditioner</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="s2">&quot;bddc&quot;</span><span class="p">)</span>
+    <span class="n">mass</span><span class="o">.</span><span class="n">Assemble</span><span class="p">()</span>
+    <span class="n">rhs</span><span class="o">.</span><span class="n">Assemble</span><span class="p">()</span>
+
+    <span class="n">residual</span> <span class="o">=</span> <span class="n">gf_kappa</span><span class="o">.</span><span class="n">vec</span><span class="o">.</span><span class="n">CreateVector</span><span class="p">()</span>
+    <span class="n">mass</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">gf_kappa</span><span class="o">.</span><span class="n">vec</span><span class="p">,</span> <span class="n">residual</span><span class="p">)</span>
+    <span class="n">residual</span><span class="o">.</span><span class="n">data</span> <span class="o">-=</span> <span class="n">rhs</span><span class="o">.</span><span class="n">vec</span>
+
+    <span class="k">if</span> <span class="n">mass</span><span class="o">.</span><span class="n">condense</span><span class="p">:</span>
+        <span class="n">invS</span> <span class="o">=</span> <span class="n">CGSolver</span><span class="p">(</span><span class="n">mass</span><span class="o">.</span><span class="n">mat</span><span class="p">,</span> <span class="n">pre</span><span class="o">.</span><span class="n">mat</span><span class="p">,</span> <span class="n">printing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="n">IdentityMatrix</span><span class="p">()</span> <span class="o">+</span> <span class="n">mass</span><span class="o">.</span><span class="n">harmonic_extension</span>
+        <span class="n">inv</span> <span class="o">=</span> <span class="n">mass</span><span class="o">.</span><span class="n">inner_solve</span> <span class="o">+</span> <span class="n">ext</span> <span class="o">@</span> <span class="n">invS</span> <span class="o">@</span> <span class="n">ext</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">inv</span> <span class="o">=</span> <span class="n">mass</span><span class="o">.</span><span class="n">mat</span><span class="o">.</span><span class="n">Inverse</span><span class="p">(</span><span class="n">fes</span><span class="o">.</span><span class="n">FreeDofs</span><span class="p">(),</span> <span class="n">inverse</span><span class="o">=</span><span class="s2">&quot;sparsecholesky&quot;</span><span class="p">)</span>
+
+    <span class="n">gf_kappa</span><span class="o">.</span><span class="n">vec</span><span class="o">.</span><span class="n">data</span> <span class="o">-=</span> <span class="n">inv</span> <span class="o">*</span> <span class="n">residual</span>
+    <span class="k">return</span> <span class="n">gf_kappa</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_hm1_norm</span><span class="p">(</span><span class="n">func_vol</span><span class="p">,</span> <span class="n">func_bnd</span><span class="p">,</span> <span class="n">ex_solution</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+    <span class="n">fes</span> <span class="o">=</span> <span class="n">H1</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">dirichlet_bbnd</span><span class="o">=</span><span class="s2">&quot;.*&quot;</span><span class="p">)</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">fes</span><span class="o">.</span><span class="n">TnT</span><span class="p">()</span>
+
+    <span class="n">form</span> <span class="o">=</span> <span class="n">BilinearForm</span><span class="p">(</span><span class="n">fes</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">symmetric_storage</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">condense</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">form</span> <span class="o">+=</span> <span class="p">(</span><span class="n">u</span> <span class="o">*</span> <span class="n">v</span> <span class="o">+</span> <span class="n">Grad</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">Trace</span><span class="p">()</span> <span class="o">*</span> <span class="n">Grad</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">Trace</span><span class="p">())</span> <span class="o">*</span> <span class="n">ds</span>
+
+    <span class="n">pre</span> <span class="o">=</span> <span class="n">Preconditioner</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="s2">&quot;bddc&quot;</span><span class="p">)</span>
+    <span class="n">form</span><span class="o">.</span><span class="n">Assemble</span><span class="p">()</span>
+
+    <span class="n">invS</span> <span class="o">=</span> <span class="n">CGSolver</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">mat</span><span class="p">,</span> <span class="n">pre</span><span class="p">,</span> <span class="n">printing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">condense</span><span class="p">:</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="n">IdentityMatrix</span><span class="p">()</span> <span class="o">+</span> <span class="n">form</span><span class="o">.</span><span class="n">harmonic_extension</span>
+        <span class="n">inv</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">inner_solve</span> <span class="o">+</span> <span class="n">ext</span> <span class="o">@</span> <span class="n">invS</span> <span class="o">@</span> <span class="n">ext</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">inv</span> <span class="o">=</span> <span class="n">invS</span>
+
+    <span class="n">rhs</span> <span class="o">=</span> <span class="n">MultiVector</span><span class="p">(</span><span class="n">fes</span><span class="o">.</span><span class="n">ndof</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">gf_lift</span> <span class="o">=</span> <span class="n">GridFunction</span><span class="p">(</span><span class="n">fes</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="k">else</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">linear</span> <span class="o">=</span> <span class="n">LinearForm</span><span class="p">(</span>
+            <span class="n">InnerProduct</span><span class="p">(</span><span class="n">func_vol</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">ex_solution</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">ds</span>
+            <span class="o">+</span> <span class="n">InnerProduct</span><span class="p">(</span><span class="n">func_bnd</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">ds</span><span class="p">(</span><span class="n">element_boundary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">Assemble</span><span class="p">()</span>
+        <span class="n">rhs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">linear</span><span class="o">.</span><span class="n">vec</span>
+
+    <span class="n">lift_vecs</span> <span class="o">=</span> <span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="n">rhs</span><span class="p">)</span><span class="o">.</span><span class="n">Evaluate</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+        <span class="n">gf_lift</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">vec</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">lift_vecs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">index_sym_matrix</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="n">lifted</span> <span class="o">=</span> <span class="n">CF</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">gf_lift</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index_sym_matrix</span><span class="p">),</span> <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">grad_lifted</span> <span class="o">=</span> <span class="n">CF</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">Grad</span><span class="p">(</span><span class="n">gf_lift</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index_sym_matrix</span><span class="p">),</span> <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">Integrate</span><span class="p">(</span><span class="n">InnerProduct</span><span class="p">(</span><span class="n">lifted</span><span class="p">,</span> <span class="n">lifted</span><span class="p">)</span> <span class="o">+</span> <span class="n">InnerProduct</span><span class="p">(</span><span class="n">grad_lifted</span><span class="p">,</span> <span class="n">grad_lifted</span><span class="p">),</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">BND</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_hm1_error</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">K_ex</span><span class="p">,</span> <span class="n">K_lifted</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">order</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Order must be at least 1&quot;</span><span class="p">)</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="n">specialcf</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">specialcf</span><span class="o">.</span><span class="n">tangential</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">Cross</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+    <span class="n">gf_average_nv</span> <span class="o">=</span> <span class="n">GridFunction</span><span class="p">(</span><span class="n">VectorFacetSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">gf_average_nv</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">definedon</span><span class="o">=</span><span class="n">mesh</span><span class="o">.</span><span class="n">Boundaries</span><span class="p">(</span><span class="s2">&quot;.*&quot;</span><span class="p">))</span>
+    <span class="n">cf_average_nv</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">gf_average_nv</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">K_lifted</span><span class="p">:</span>
+        <span class="n">vol_term</span> <span class="o">=</span> <span class="n">K_lifted</span>
+        <span class="n">bnd_term</span> <span class="o">=</span> <span class="n">CF</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">OuterProduct</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">vol_term</span> <span class="o">=</span> <span class="n">Grad</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">bnd_term</span> <span class="o">=</span> <span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">acos</span><span class="p">(</span><span class="n">cf_average_nv</span> <span class="o">*</span> <span class="n">mu</span><span class="p">))</span> <span class="o">*</span> <span class="n">OuterProduct</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">compute_hm1_norm</span><span class="p">(</span><span class="n">vol_term</span><span class="p">,</span> <span class="n">bnd_term</span><span class="p">,</span> <span class="n">K_ex</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_lifted_curvature_convergence</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">canonical_interp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">maxhs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">draw_last</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">maxhs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">maxhs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+
+    <span class="n">l2err</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">hm1err</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">hm1liftederr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">l2rate</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">hm1rate</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">hm1liftedrate</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ndof</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">with</span> <span class="n">TaskManager</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">maxh</span> <span class="ow">in</span> <span class="n">maxhs</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">example</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: maxh=</span><span class="si">{</span><span class="n">maxh</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">example</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">GenerateMesh</span><span class="p">(</span><span class="n">maxh</span><span class="o">=</span><span class="n">maxh</span><span class="p">))</span>
+
+            <span class="n">gf_Phi</span> <span class="o">=</span> <span class="n">GridFunction</span><span class="p">(</span><span class="n">VectorH1</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">))</span>
+            <span class="n">gf_Phi</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span>
+                <span class="n">example</span><span class="p">[</span><span class="s2">&quot;embedding&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">CF</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+                <span class="n">definedon</span><span class="o">=</span><span class="n">mesh</span><span class="o">.</span><span class="n">Boundaries</span><span class="p">(</span><span class="s2">&quot;.*&quot;</span><span class="p">),</span>
+                <span class="n">dual</span><span class="o">=</span><span class="n">canonical_interp</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">mesh</span><span class="o">.</span><span class="n">SetDeformation</span><span class="p">(</span><span class="n">gf_Phi</span><span class="p">)</span>
+            <span class="n">K_lifted</span> <span class="o">=</span> <span class="n">compute_lifted_shape_operator</span><span class="p">(</span>
+                <span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span>
+                <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+                <span class="n">dirichlet</span><span class="o">=</span><span class="n">example</span><span class="p">[</span><span class="s2">&quot;boundaries&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">K_ex</span><span class="o">=</span><span class="n">example</span><span class="p">[</span><span class="s2">&quot;Weingarten&quot;</span><span class="p">],</span>
+                <span class="n">neumann</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">example</span><span class="p">[</span><span class="s2">&quot;boundaries&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">example</span><span class="p">[</span><span class="s2">&quot;boundaries&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="n">nv_ex</span><span class="o">=</span><span class="n">example</span><span class="p">[</span><span class="s2">&quot;normal&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+
+            <span class="n">l2err</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">sqrt</span><span class="p">(</span>
+                    <span class="n">Integrate</span><span class="p">(</span>
+                        <span class="n">InnerProduct</span><span class="p">(</span><span class="n">K_lifted</span> <span class="o">-</span> <span class="n">example</span><span class="p">[</span><span class="s2">&quot;Weingarten&quot;</span><span class="p">],</span> <span class="n">K_lifted</span> <span class="o">-</span> <span class="n">example</span><span class="p">[</span><span class="s2">&quot;Weingarten&quot;</span><span class="p">]),</span>
+                        <span class="n">mesh</span><span class="p">,</span>
+                        <span class="n">BND</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">hm1err</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">compute_hm1_error</span><span class="p">(</span><span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">K_ex</span><span class="o">=</span><span class="n">example</span><span class="p">[</span><span class="s2">&quot;Weingarten&quot;</span><span class="p">]))</span>
+            <span class="n">hm1liftederr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">compute_hm1_error</span><span class="p">(</span><span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">K_ex</span><span class="o">=</span><span class="n">example</span><span class="p">[</span><span class="s2">&quot;Weingarten&quot;</span><span class="p">],</span> <span class="n">K_lifted</span><span class="o">=</span><span class="n">K_lifted</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l2err</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">l2rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">l2err</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">l2err</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">log</span><span class="p">(</span><span class="n">maxhs</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">l2err</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">maxhs</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">l2err</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+                <span class="n">hm1rate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">hm1err</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">hm1err</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">log</span><span class="p">(</span><span class="n">maxhs</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">hm1err</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">maxhs</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">hm1err</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+                <span class="n">hm1liftedrate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">log</span><span class="p">(</span><span class="n">hm1liftederr</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">hm1liftederr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="o">/</span> <span class="n">log</span><span class="p">(</span><span class="n">maxhs</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">hm1liftederr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">maxhs</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">hm1liftederr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="p">)</span>
+
+            <span class="n">ndof</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">K_lifted</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">ndof</span><span class="p">)</span>
+            <span class="n">last</span> <span class="o">=</span> <span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">K_lifted</span><span class="p">)</span>
+            <span class="n">mesh</span><span class="o">.</span><span class="n">UnsetDeformation</span><span class="p">()</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">example</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;order&quot;</span><span class="p">:</span> <span class="n">order</span><span class="p">,</span>
+        <span class="s2">&quot;maxhs&quot;</span><span class="p">:</span> <span class="n">maxhs</span><span class="p">,</span>
+        <span class="s2">&quot;l2err&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">l2err</span><span class="p">],</span>
+        <span class="s2">&quot;hm1err&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hm1err</span><span class="p">],</span>
+        <span class="s2">&quot;hm1liftederr&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hm1liftederr</span><span class="p">],</span>
+        <span class="s2">&quot;l2rate&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">l2rate</span><span class="p">],</span>
+        <span class="s2">&quot;hm1rate&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hm1rate</span><span class="p">],</span>
+        <span class="s2">&quot;hm1liftedrate&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hm1liftedrate</span><span class="p">],</span>
+        <span class="s2">&quot;ndof&quot;</span><span class="p">:</span> <span class="n">ndof</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">draw_last</span> <span class="ow">and</span> <span class="n">last</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mesh</span><span class="p">,</span> <span class="n">K_lifted</span> <span class="o">=</span> <span class="n">last</span>
+        <span class="n">Draw</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">Trace</span><span class="p">(</span><span class="n">K_lifted</span><span class="p">),</span> <span class="n">mesh</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;mean curvature, </span><span class="si">{</span><span class="n">example</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">deformation</span><span class="o">=</span><span class="n">gf_Phi</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_convergence</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="n">ndof</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;ndof&quot;</span><span class="p">]</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;order&quot;</span><span class="p">]</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ndof</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;l2err&quot;</span><span class="p">],</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$L^2$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ndof</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;hm1err&quot;</span><span class="p">],</span> <span class="s2">&quot;s-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$H^{-1}$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ndof</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;hm1liftederr&quot;</span><span class="p">],</span> <span class="s2">&quot;^-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;lifted $H^{-1}$&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ndof</span> <span class="ow">and</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;hm1err&quot;</span><span class="p">]:</span>
+        <span class="n">ref_k</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;hm1err&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">ndof</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">order</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ndof</span><span class="p">]</span>
+        <span class="n">ref_kp1</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;hm1err&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">ndof</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span> <span class="o">**</span> <span class="p">((</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ndof</span><span class="p">]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ndof</span><span class="p">,</span> <span class="n">ref_k</span><span class="p">,</span> <span class="s2">&quot;k--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$N^</span><span class="se">{{</span><span class="s2">-</span><span class="si">{</span><span class="n">order</span><span class="si">}</span><span class="s2">/2</span><span class="se">}}</span><span class="s2">$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">ndof</span><span class="p">,</span> <span class="n">ref_kp1</span><span class="p">,</span> <span class="s2">&quot;k:&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;$N^</span><span class="se">{{</span><span class="s2">-(</span><span class="si">{</span><span class="n">order</span><span class="si">}</span><span class="s2">+1)/2</span><span class="se">}}</span><span class="s2">$&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;number of dofs $N$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">print_result</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  L2 errors:     &quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;l2err&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  L2 rates:      &quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;l2rate&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  H-1 errors:    &quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;hm1err&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  H-1 rates:     &quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;hm1rate&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  lifted H-1 errors:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;hm1liftederr&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  lifted H-1 rates: &quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;hm1liftedrate&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Number of dofs:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;ndof&quot;</span><span class="p">])</span>
+    <span class="n">plot_convergence</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="geometry-generators">
+<h2><span class="section-number">21.2. </span>Geometry generators<a class="headerlink" href="#geometry-generators" title="Permalink to this heading">#</a></h2>
+<p>Each function returns a dictionary containing the reference-domain geometry, the embedding into <span class="math notranslate nohighlight">\(\mathbb R^3\)</span>, the exact normal, the exact Weingarten tensor, and the boundary names used by the lifting routine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_half_sphere</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mf">1.3</span><span class="p">):</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">radius</span>
+    <span class="n">r_ref</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">atan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">embedding</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">CF</span><span class="p">((</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">r_ref</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">r_ref</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="n">r_ref</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)))</span>
+
+    <span class="n">radius_ex</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">x_ex</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">radius_ex</span>
+    <span class="n">y_ex</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">y</span> <span class="o">/</span> <span class="n">radius_ex</span>
+    <span class="n">z_ex</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">z</span> <span class="o">/</span> <span class="n">radius_ex</span>
+    <span class="n">surface</span> <span class="o">=</span> <span class="n">x_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">z_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">normal</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">CF</span><span class="p">((</span><span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">x_ex</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">y_ex</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">z_ex</span><span class="p">))))</span>
+    <span class="n">Weingarten</span> <span class="o">=</span> <span class="n">exact_weingarten_from_normal</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">(</span><span class="n">x_ex</span><span class="p">,</span> <span class="n">y_ex</span><span class="p">,</span> <span class="n">z_ex</span><span class="p">),</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">face</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">R</span><span class="p">)</span><span class="o">.</span><span class="n">Face</span><span class="p">()</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;bnd&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Half sphere, R=</span><span class="si">{</span><span class="n">R</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">OCCGeometry</span><span class="p">(</span><span class="n">face</span><span class="p">),</span> <span class="s2">&quot;embedding&quot;</span><span class="p">:</span> <span class="n">embedding</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="n">normal</span><span class="p">,</span> <span class="s2">&quot;Weingarten&quot;</span><span class="p">:</span> <span class="n">Weingarten</span><span class="p">,</span> <span class="s2">&quot;boundaries&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bnd&quot;</span><span class="p">]}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_ellipsoid_part</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">0.8</span><span class="p">):</span>
+    <span class="n">embedding</span> <span class="o">=</span> <span class="n">CF</span><span class="p">((</span><span class="n">a</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">b</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">c</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+
+    <span class="n">radius_ex</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">x</span> <span class="o">/</span> <span class="n">a</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">z</span> <span class="o">/</span> <span class="n">c</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">x_ex</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">radius_ex</span>
+    <span class="n">y_ex</span> <span class="o">=</span> <span class="n">y</span> <span class="o">/</span> <span class="n">radius_ex</span>
+    <span class="n">z_ex</span> <span class="o">=</span> <span class="n">z</span> <span class="o">/</span> <span class="n">radius_ex</span>
+    <span class="n">surface</span> <span class="o">=</span> <span class="n">x_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">z_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">normal</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">CF</span><span class="p">((</span><span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">x_ex</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">y_ex</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">z_ex</span><span class="p">))))</span>
+    <span class="n">Weingarten</span> <span class="o">=</span> <span class="n">exact_weingarten_from_normal</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">(</span><span class="n">x_ex</span><span class="p">,</span> <span class="n">y_ex</span><span class="p">,</span> <span class="n">z_ex</span><span class="p">),</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">face</span> <span class="o">=</span> <span class="n">MoveTo</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">pi</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">Face</span><span class="p">()</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;top&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;bottom&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Ellipsoid part, a=</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">, c=</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">OCCGeometry</span><span class="p">(</span><span class="n">face</span><span class="p">),</span> <span class="s2">&quot;embedding&quot;</span><span class="p">:</span> <span class="n">embedding</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="n">normal</span><span class="p">,</span> <span class="s2">&quot;Weingarten&quot;</span><span class="p">:</span> <span class="n">Weingarten</span><span class="p">,</span> <span class="s2">&quot;boundaries&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">]}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_hyperboloid</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>
+    <span class="n">embedding</span> <span class="o">=</span> <span class="n">CF</span><span class="p">((</span><span class="n">R</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">cosh</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">R</span> <span class="o">*</span> <span class="n">sinh</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">R</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">cosh</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
+
+    <span class="n">radius_ex</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">x_ex</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">radius_ex</span>
+    <span class="n">y_ex</span> <span class="o">=</span> <span class="n">y</span> <span class="o">/</span> <span class="n">radius_ex</span>
+    <span class="n">z_ex</span> <span class="o">=</span> <span class="n">z</span> <span class="o">/</span> <span class="n">radius_ex</span>
+    <span class="n">surface</span> <span class="o">=</span> <span class="n">x_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">y_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">z_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">normal</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">CF</span><span class="p">((</span><span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">x_ex</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">y_ex</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">z_ex</span><span class="p">))))</span>
+    <span class="n">Weingarten</span> <span class="o">=</span> <span class="n">exact_weingarten_from_normal</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">(</span><span class="n">x_ex</span><span class="p">,</span> <span class="n">y_ex</span><span class="p">,</span> <span class="n">z_ex</span><span class="p">),</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">face</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">Face</span><span class="p">()</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;bottom&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;top&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Hyperboloid, R=</span><span class="si">{</span><span class="n">R</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">OCCGeometry</span><span class="p">(</span><span class="n">face</span><span class="p">),</span> <span class="s2">&quot;embedding&quot;</span><span class="p">:</span> <span class="n">embedding</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="n">normal</span><span class="p">,</span> <span class="s2">&quot;Weingarten&quot;</span><span class="p">:</span> <span class="n">Weingarten</span><span class="p">,</span> <span class="s2">&quot;boundaries&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">]}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_pseudosphere</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">gu</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">log</span><span class="p">(</span><span class="n">tan</span><span class="p">(</span><span class="n">u</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">acosh_cf</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">log</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">v</span><span class="p">)</span>
+
+    <span class="n">u</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">/</span> <span class="mi">9</span> <span class="o">-</span> <span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">/</span> <span class="mi">18</span>
+    <span class="n">embedding</span> <span class="o">=</span> <span class="n">CF</span><span class="p">((</span><span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">),</span> <span class="n">gu</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+
+    <span class="n">surface</span> <span class="o">=</span> <span class="p">(</span><span class="n">acosh_cf</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">normal</span> <span class="o">=</span> <span class="o">-</span><span class="n">Normalize</span><span class="p">(</span><span class="n">CF</span><span class="p">((</span><span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">z</span><span class="p">))))</span>
+    <span class="n">Weingarten</span> <span class="o">=</span> <span class="n">exact_weingarten_from_normal</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">face</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">Face</span><span class="p">()</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;bottom&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;top&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Pseudosphere&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">OCCGeometry</span><span class="p">(</span><span class="n">face</span><span class="p">),</span> <span class="s2">&quot;embedding&quot;</span><span class="p">:</span> <span class="n">embedding</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="n">normal</span><span class="p">,</span> <span class="s2">&quot;Weingarten&quot;</span><span class="p">:</span> <span class="n">Weingarten</span><span class="p">,</span> <span class="s2">&quot;boundaries&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">]}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_catenoid</span><span class="p">():</span>
+    <span class="n">embedding</span> <span class="o">=</span> <span class="n">CF</span><span class="p">((</span><span class="n">cosh</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">))</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">),</span> <span class="n">cosh</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">))</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">),</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)))</span>
+
+    <span class="n">surface</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">cosh</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">normal</span> <span class="o">=</span> <span class="o">-</span><span class="n">Normalize</span><span class="p">(</span><span class="n">CF</span><span class="p">((</span><span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">z</span><span class="p">))))</span>
+    <span class="n">Weingarten</span> <span class="o">=</span> <span class="n">exact_weingarten_from_normal</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">face</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">Face</span><span class="p">()</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;bottom&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;top&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Catenoid&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">OCCGeometry</span><span class="p">(</span><span class="n">face</span><span class="p">),</span> <span class="s2">&quot;embedding&quot;</span><span class="p">:</span> <span class="n">embedding</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="n">normal</span><span class="p">,</span> <span class="s2">&quot;Weingarten&quot;</span><span class="p">:</span> <span class="n">Weingarten</span><span class="p">,</span> <span class="s2">&quot;boundaries&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">]}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_torus</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.3</span><span class="p">):</span>
+    <span class="n">embedding</span> <span class="o">=</span> <span class="n">CF</span><span class="p">(((</span><span class="n">R</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">R</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">r</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">atan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">rho_ex</span> <span class="o">=</span> <span class="n">R</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">rho</span> <span class="o">-</span> <span class="n">R</span><span class="p">)</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">rho</span> <span class="o">-</span> <span class="n">R</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">z_ex</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">z</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">rho</span> <span class="o">-</span> <span class="n">R</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">x_ex</span> <span class="o">=</span> <span class="n">rho_ex</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">y_ex</span> <span class="o">=</span> <span class="n">rho_ex</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">surface</span> <span class="o">=</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y_ex</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">R</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">z_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">normal</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">CF</span><span class="p">((</span><span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">x_ex</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">y_ex</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">z_ex</span><span class="p">))))</span>
+    <span class="n">Weingarten</span> <span class="o">=</span> <span class="n">exact_weingarten_from_normal</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">(</span><span class="n">x_ex</span><span class="p">,</span> <span class="n">y_ex</span><span class="p">,</span> <span class="n">z_ex</span><span class="p">),</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">face</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">)</span><span class="o">.</span><span class="n">Face</span><span class="p">()</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;bottom&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;top&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">X</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Identify</span><span class="p">(</span><span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">X</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">],</span> <span class="s2">&quot;id_x&quot;</span><span class="p">,</span> <span class="n">IdentificationType</span><span class="o">.</span><span class="n">PERIODIC</span><span class="p">,</span> <span class="n">trafo</span><span class="o">=</span><span class="n">gp_Trsf</span><span class="o">.</span><span class="n">Translation</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">X</span><span class="p">))</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">Y</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Identify</span><span class="p">(</span><span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">Y</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">],</span> <span class="s2">&quot;id_y&quot;</span><span class="p">,</span> <span class="n">IdentificationType</span><span class="o">.</span><span class="n">PERIODIC</span><span class="p">,</span> <span class="n">trafo</span><span class="o">=</span><span class="n">gp_Trsf</span><span class="o">.</span><span class="n">Translation</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">Y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Torus, R=</span><span class="si">{</span><span class="n">R</span><span class="si">}</span><span class="s2">, r=</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">OCCGeometry</span><span class="p">(</span><span class="n">face</span><span class="p">),</span> <span class="s2">&quot;embedding&quot;</span><span class="p">:</span> <span class="n">embedding</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="n">normal</span><span class="p">,</span> <span class="s2">&quot;Weingarten&quot;</span><span class="p">:</span> <span class="n">Weingarten</span><span class="p">,</span> <span class="s2">&quot;boundaries&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;left|right&quot;</span><span class="p">,</span> <span class="s2">&quot;bottom|top&quot;</span><span class="p">]}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_cylinder</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="n">embedding</span> <span class="o">=</span> <span class="n">CF</span><span class="p">((</span><span class="n">r</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">r</span><span class="p">),</span> <span class="n">r</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">r</span><span class="p">),</span> <span class="n">y</span><span class="p">))</span>
+
+    <span class="n">radius_ex</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">x_ex</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">radius_ex</span>
+    <span class="n">y_ex</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">y</span> <span class="o">/</span> <span class="n">radius_ex</span>
+    <span class="n">z_ex</span> <span class="o">=</span> <span class="n">z</span>
+    <span class="n">surface</span> <span class="o">=</span> <span class="n">x_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y_ex</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">normal</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">CF</span><span class="p">((</span><span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">x_ex</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">y_ex</span><span class="p">),</span> <span class="n">surface</span><span class="o">.</span><span class="n">Diff</span><span class="p">(</span><span class="n">z_ex</span><span class="p">))))</span>
+    <span class="n">Weingarten</span> <span class="o">=</span> <span class="n">exact_weingarten_from_normal</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">(</span><span class="n">x_ex</span><span class="p">,</span> <span class="n">y_ex</span><span class="p">,</span> <span class="n">z_ex</span><span class="p">),</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">face</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span><span class="o">.</span><span class="n">Face</span><span class="p">()</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;bottom&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;top&quot;</span>
+    <span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">X</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Identify</span><span class="p">(</span><span class="n">face</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">X</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="p">],</span> <span class="s2">&quot;id_x&quot;</span><span class="p">,</span> <span class="n">IdentificationType</span><span class="o">.</span><span class="n">PERIODIC</span><span class="p">,</span> <span class="n">trafo</span><span class="o">=</span><span class="n">gp_Trsf</span><span class="o">.</span><span class="n">Translation</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">X</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Cylinder, r=</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">, H=</span><span class="si">{</span><span class="n">H</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">OCCGeometry</span><span class="p">(</span><span class="n">face</span><span class="p">),</span> <span class="s2">&quot;embedding&quot;</span><span class="p">:</span> <span class="n">embedding</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="n">normal</span><span class="p">,</span> <span class="s2">&quot;Weingarten&quot;</span><span class="p">:</span> <span class="n">Weingarten</span><span class="p">,</span> <span class="s2">&quot;boundaries&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;left|right&quot;</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="experiment-settings">
+<h2><span class="section-number">21.3. </span>Experiment settings<a class="headerlink" href="#experiment-settings" title="Permalink to this heading">#</a></h2>
+<p>All experiments compute the <span class="math notranslate nohighlight">\(L^2\)</span> and <span class="math notranslate nohighlight">\(H^{-1}\)</span>-norm of the lifted Weingarten tensor <span class="math notranslate nohighlight">\(\kappa_h\)</span> and the <span class="math notranslate nohighlight">\(H^{-1}\)</span>-norm of the generalized Weingarten tensor. For <code class="docutils literal notranslate"><span class="pre">dual=False</span></code> the <span class="math notranslate nohighlight">\(H^{-1}\)</span>-norm rates of the generalized Weingarten tensor and the lifted Weingarten tensor coincide and are one order better than the <span class="math notranslate nohighlight">\(L^2\)</span>-norm of the lifted Weingarten tensor. If the canonical lagrange interpolation operator is used with <code class="docutils literal notranslate"><span class="pre">dual=True</span></code> both the <span class="math notranslate nohighlight">\(L^2\)</span>-norm and <span class="math notranslate nohighlight">\(H^{-1}\)</span>-norm of the lifted Weingarten tensor have an increased convergence rate, whereas the generalized Weingarten tensor has the same <span class="math notranslate nohighlight">\(H^{-1}\)</span>-norm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">order</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="half-sphere">
+<h2><span class="section-number">21.4. </span>Half sphere<a class="headerlink" href="#half-sphere" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxhs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="n">half_sphere_result</span> <span class="o">=</span> <span class="n">compute_lifted_curvature_convergence</span><span class="p">(</span>
+    <span class="n">make_half_sphere</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mf">1.3</span><span class="p">),</span>
+    <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+    <span class="n">canonical_interp</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">maxhs</span><span class="o">=</span><span class="n">maxhs</span><span class="p">,</span>
+    <span class="n">draw_last</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">print_result</span><span class="p">(</span><span class="n">half_sphere_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Half sphere, R=1.3: maxh=1.0000
+Half sphere, R=1.3: maxh=0.5000
+Half sphere, R=1.3: maxh=0.2500
+Half sphere, R=1.3: maxh=0.1250
+Half sphere, R=1.3: maxh=0.0625
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "721d0b7fb8264be9b9be451b0e79309d"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Half sphere, R=1.3
+  L2 errors:      [1.4102379158749954, 1.1328655892835704, 0.49776185095970693, 0.2424658525105571, 0.11776155655615374]
+  L2 rates:       [0.31596187438375845, 1.1864491305039941, 1.0376740839762382, 1.0419129347942995]
+  H-1 errors:     [1.0350667731807077, 0.8851051056225717, 0.43987282907377356, 0.2204100530607327, 0.1079018320271181]
+  H-1 rates:      [0.22580315088494313, 1.008762295624357, 0.9968964610218424, 1.030470667722433]
+  lifted H-1 errors: [0.41473446275135123, 0.27792890759723177, 0.06246668047922033, 0.016823590416636475, 0.004008546351933564]
+  lifted H-1 rates:  [0.5774720361780795, 2.1535571268691838, 1.8926012340906508, 2.0693345703532957]
+  Number of dofs: [47, 68, 282, 1165, 4999]
+</pre></div>
+</div>
+<img alt="../_images/78575c0c8d1537ef346b06691f2be8d66d7d9a66d164588695a70a9f296c6697.png" src="../_images/78575c0c8d1537ef346b06691f2be8d66d7d9a66d164588695a70a9f296c6697.png" />
+</div>
+</div>
+</section>
+<section id="ellipsoid-part">
+<h2><span class="section-number">21.5. </span>Ellipsoid part<a class="headerlink" href="#ellipsoid-part" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxhs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="n">ellipsoid_part_result</span> <span class="o">=</span> <span class="n">compute_lifted_curvature_convergence</span><span class="p">(</span>
+    <span class="n">make_ellipsoid_part</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">0.8</span><span class="p">),</span>
+    <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+    <span class="n">canonical_interp</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">maxhs</span><span class="o">=</span><span class="n">maxhs</span><span class="p">,</span>
+    <span class="n">draw_last</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">print_result</span><span class="p">(</span><span class="n">ellipsoid_part_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ellipsoid part, a=1, b=1.5, c=0.8: maxh=1.0000
+Ellipsoid part, a=1, b=1.5, c=0.8: maxh=0.5000
+Ellipsoid part, a=1, b=1.5, c=0.8: maxh=0.2500
+Ellipsoid part, a=1, b=1.5, c=0.8: maxh=0.1250
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ellipsoid part, a=1, b=1.5, c=0.8: maxh=0.0625
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ellipsoid part, a=1, b=1.5, c=0.8: maxh=0.0312
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "fe49ad06438749a89d42d65b990f3d30"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ellipsoid part, a=1, b=1.5, c=0.8
+  L2 errors:      [0.9769764921696732, 0.732491783735543, 0.42061588522005083, 0.2282601903424305, 0.1167136092543703, 0.07508044064844262]
+  L2 rates:       [0.4155112716418971, 0.8003092403597075, 0.8818240680867302, 0.9677064740302908, 0.6364637721183387]
+  H-1 errors:     [0.28236830173014005, 0.19852063100847428, 0.10067478793530449, 0.04503942389019908, 0.022955731755741456, 0.01148622329955444]
+  H-1 rates:      [0.5082891973367044, 0.9795865120921068, 1.160442154547184, 0.9723339523724185, 0.9989499072872543]
+  lifted H-1 errors: [0.10674674407845607, 0.06789264745748076, 0.01909107598693873, 0.005687673839113286, 0.0016343345008302595, 0.0005730603258415902]
+  lifted H-1 rates:  [0.6528648172648174, 1.8303569275935292, 1.7469877755931498, 1.7991354441692462, 1.511944367455937]
+  Number of dofs: [9, 20, 88, 399, 1518, 5934]
+</pre></div>
+</div>
+<img alt="../_images/1a638408759b83ca649116b7d311d800ce498e94fd1928ef0c7439cf2b1da39d.png" src="../_images/1a638408759b83ca649116b7d311d800ce498e94fd1928ef0c7439cf2b1da39d.png" />
+</div>
+</div>
+</section>
+<section id="hyperboloid">
+<h2><span class="section-number">21.6. </span>Hyperboloid<a class="headerlink" href="#hyperboloid" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxhs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">)]</span>
+<span class="n">hyperboloid_result</span> <span class="o">=</span> <span class="n">compute_lifted_curvature_convergence</span><span class="p">(</span>
+    <span class="n">make_hyperboloid</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="mf">1.5</span><span class="p">),</span>
+    <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+    <span class="n">canonical_interp</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">maxhs</span><span class="o">=</span><span class="n">maxhs</span><span class="p">,</span>
+    <span class="n">draw_last</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">print_result</span><span class="p">(</span><span class="n">hyperboloid_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hyperboloid, R=1.5: maxh=0.2500
+Hyperboloid, R=1.5: maxh=0.1250
+Hyperboloid, R=1.5: maxh=0.0625
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hyperboloid, R=1.5: maxh=0.0312
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "cd74e8d74c75476c88edc083bd459322"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hyperboloid, R=1.5
+  L2 errors:      [1.0573989098342087, 0.49272913003828006, 0.2387479537568001, 0.119389383261597]
+  L2 rates:       [1.1016530733317302, 1.045306397728288, 0.9998138180610787]
+  H-1 errors:     [0.9449042641702161, 0.5050510654417869, 0.2556878544182583, 0.12970816302639765]
+  H-1 rates:      [0.9037389003725302, 0.9820456334726517, 0.9791143551722644]
+  lifted H-1 errors: [0.22828358590375028, 0.0535420504982697, 0.012675628629977767, 0.0031449411036873235]
+  lifted H-1 rates:  [2.0920828343206797, 2.078615093449807, 2.010952392773589]
+  Number of dofs: [59, 229, 926, 3625]
+</pre></div>
+</div>
+<img alt="../_images/21107851142c6addf9f2dbc6417d4ae7e3d3dff042b2b58d426899e3e5b79948.png" src="../_images/21107851142c6addf9f2dbc6417d4ae7e3d3dff042b2b58d426899e3e5b79948.png" />
+</div>
+</div>
+</section>
+<section id="pseudosphere">
+<h2><span class="section-number">21.7. </span>Pseudosphere<a class="headerlink" href="#pseudosphere" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxhs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">)]</span>
+<span class="n">pseudosphere_result</span> <span class="o">=</span> <span class="n">compute_lifted_curvature_convergence</span><span class="p">(</span>
+    <span class="n">make_pseudosphere</span><span class="p">(),</span>
+    <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+    <span class="n">canonical_interp</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">maxhs</span><span class="o">=</span><span class="n">maxhs</span><span class="p">,</span>
+    <span class="n">draw_last</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">print_result</span><span class="p">(</span><span class="n">pseudosphere_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pseudosphere: maxh=0.2500
+Pseudosphere: maxh=0.1250
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pseudosphere: maxh=0.0625
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pseudosphere: maxh=0.0312
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "d6228adf039940c88ba6b9dcc7dc96c8"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pseudosphere
+  L2 errors:      [2.664402160323283, 1.2500265613033739, 0.5882692058273764, 0.295564887442557]
+  L2 rates:       [1.091853106326494, 1.0874103279762077, 0.9930016271781534]
+  H-1 errors:     [0.44264403129139035, 0.2801251660297776, 0.1401193729151179, 0.07153440615410697]
+  H-1 rates:      [0.6600753691886401, 0.999415162134313, 0.9699472246628766]
+  lifted H-1 errors: [0.15485270573424229, 0.04834079773680152, 0.012813332884899017, 0.003756191127745582]
+  lifted H-1 rates:  [1.6795834051050305, 1.91559549625976, 1.770303405710476]
+  Number of dofs: [59, 229, 926, 3625]
+</pre></div>
+</div>
+<img alt="../_images/4e2b649ae0e3fb11854a21328d1a192f174a73f6ad502d708572bf826a56ef18.png" src="../_images/4e2b649ae0e3fb11854a21328d1a192f174a73f6ad502d708572bf826a56ef18.png" />
+</div>
+</div>
+</section>
+<section id="catenoid">
+<h2><span class="section-number">21.8. </span>Catenoid<a class="headerlink" href="#catenoid" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxhs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>
+<span class="n">catenoid_result</span> <span class="o">=</span> <span class="n">compute_lifted_curvature_convergence</span><span class="p">(</span>
+    <span class="n">make_catenoid</span><span class="p">(),</span>
+    <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+    <span class="n">canonical_interp</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">maxhs</span><span class="o">=</span><span class="n">maxhs</span><span class="p">,</span>
+    <span class="n">draw_last</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">print_result</span><span class="p">(</span><span class="n">catenoid_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Catenoid: maxh=0.5000
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NgException</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">maxhs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">catenoid_result</span> <span class="o">=</span> <span class="n">compute_lifted_curvature_convergence</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">make_catenoid</span><span class="p">(),</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">canonical_interp</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+
+<span class="nn">Cell In[2], line 152,</span> in <span class="ni">compute_lifted_curvature_convergence</span><span class="nt">(example, order, canonical_interp, maxhs, draw_last)</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span>                 <span class="n">dual</span><span class="o">=</span><span class="n">canonical_interp</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">149</span>             <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">150</span> 
+<span class="g g-Whitespace">    </span><span class="mi">151</span>             <span class="n">mesh</span><span class="o">.</span><span class="n">SetDeformation</span><span class="p">(</span><span class="n">gf_Phi</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">152</span>             <span class="n">K_lifted</span> <span class="o">=</span> <span class="n">compute_lifted_shape_operator</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">153</span>                 <span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span>                 <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">155</span>                 <span class="n">dirichlet</span><span class="o">=</span><span class="n">example</span><span class="p">[</span><span class="s2">&quot;boundaries&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+
+<span class="nn">Cell In[2], line 21,</span> in <span class="ni">compute_lifted_shape_operator</span><span class="nt">(mesh, order, dirichlet, K_ex, neumann, nv_ex)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">ind_neumann</span> <span class="o">=</span> <span class="n">GridFunction</span><span class="p">(</span><span class="n">FacetSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">ind_neumann</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">definedon</span><span class="o">=</span><span class="n">mesh</span><span class="o">.</span><span class="n">BBoundaries</span><span class="p">(</span><span class="n">neumann</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> 
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">gf_average_nv</span> <span class="o">=</span> <span class="n">GridFunction</span><span class="p">(</span><span class="n">VectorFacetSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+<span class="ne">---&gt; </span><span class="mi">21</span>     <span class="n">gf_average_nv</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">definedon</span><span class="o">=</span><span class="n">mesh</span><span class="o">.</span><span class="n">Boundaries</span><span class="p">(</span><span class="s2">&quot;.*&quot;</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">cf_average_nv</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">gf_average_nv</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> 
+<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="n">fes</span> <span class="o">=</span> <span class="n">Periodic</span><span class="p">(</span><span class="n">HDivDivSurface</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dirichlet_bbnd</span><span class="o">=</span><span class="n">dirichlet</span><span class="p">))</span>
+
+<span class="ne">NgException</span>: Inverse matrix: Matrix singular
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="torus">
+<h2><span class="section-number">21.9. </span>Torus<a class="headerlink" href="#torus" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxhs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="n">torus_result</span> <span class="o">=</span> <span class="n">compute_lifted_curvature_convergence</span><span class="p">(</span>
+    <span class="n">make_torus</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.3</span><span class="p">),</span>
+    <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+    <span class="n">canonical_interp</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">maxhs</span><span class="o">=</span><span class="n">maxhs</span><span class="p">,</span>
+    <span class="n">draw_last</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">print_result</span><span class="p">(</span><span class="n">torus_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cylinder">
+<h2><span class="section-number">21.10. </span>Cylinder<a class="headerlink" href="#cylinder" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">maxhs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="n">cylinder_result</span> <span class="o">=</span> <span class="n">compute_lifted_curvature_convergence</span><span class="p">(</span>
+    <span class="n">make_cylinder</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="mf">1.4</span><span class="p">),</span>
+    <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+    <span class="n">canonical_interp</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">maxhs</span><span class="o">=</span><span class="n">maxhs</span><span class="p">,</span>
+    <span class="n">draw_last</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">print_result</span><span class="p">(</span><span class="n">cylinder_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./unit-3.1-extrinsic_curvature"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_ddg_motivation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>Extrinsic Curvature on a Triangulated Surface</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_analysis_sketch.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">22. </span>Analysis of the generalized and lifted shape operator</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvature-lifting-and-convergence-helpers">21.1. Curvature, lifting, and convergence helpers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometry-generators">21.2. Geometry generators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment-settings">21.3. Experiment settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#half-sphere">21.4. Half sphere</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ellipsoid-part">21.5. Ellipsoid part</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperboloid">21.6. Hyperboloid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudosphere">21.7. Pseudosphere</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catenoid">21.8. Catenoid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#torus">21.9. Torus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cylinder">21.10. Cylinder</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By M. Neunteufel and J. Schöberl
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

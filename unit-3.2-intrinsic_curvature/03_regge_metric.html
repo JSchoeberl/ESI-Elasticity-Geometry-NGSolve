@@ -1,0 +1,662 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>25. Regge finite elements and Regge metrics &#8212; ESI mini-course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'unit-3.2-intrinsic_curvature/03_regge_metric';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="26. Distributional Gauss curvature" href="04_distributional_gauss_curvature.html" />
+    <link rel="prev" title="24. Riemannian Manifolds" href="02_riemannian_manifolds.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../ESI-minicourse.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ESI mini-course</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../ESI-minicourse.html">
+                    ESI mini-course on Elasticity and Geometry
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Elasticity</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/modeling.html">1. Modeling Elasticity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity2D.html">1.5. Solving nonlinear Elasticity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.1-Modeling/linearized_elasticity.html">2. Linearized elasticity</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/Gallery.html">3. Gallery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity3D.html">3.1. 3D Solid Mechanics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/twisted.html">3.2. Twisted beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/metamaterial.html">3.3. Meta material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/Isoparametric.html">3.4. Isoparametric Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/dynamics.html">3.5. Elastodynamics with Newmark time-stepping</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/mixedmethods.html">4. Mixed Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/MixedLaplace.html">5. Mixed Methods for the Diffusion equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.2-Mixed/TDNNS.html">6. TDNNS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke.html">6.7. Cooke’s membrane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke-hybrid.html">6.8. Hybrid TDNNS for Cooke’s membrane benchmark</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/SchaeferTurek2d.html">7. Navier-Stokes with MCS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear plates and shells</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/derivation_plates_from_elasticity.html">8. Plates from 3D elasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/reissner_mindlin_plate_tdnns.html">9. Reissner-Mindlin plates with TDNNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/kirchhoff_love_plate_hhj.html">10. Kirchhoff-Love plates with the Hellan-Herrmann-Johnson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/introducing_shells.html">11. Linear shells</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mapping of tensors</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.1-mapping/spacehdiv.html">12. The Function Space H(div)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/tesla-mcs.html">12.3. Tesla Valve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/morphing.html">12.4. Navier-Stokes on moving domains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/SurfaceSchaeferTurek.html">12.5. H(div)-conforming Navier-Stokes on Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/heavytop.html">12.6. Heavy top without kinematik constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/rotor.html">12.7. Elastodynamics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.1-mapping/basisfunctions.html">13. Basis functions</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://project.inria.fr/ranpdes/files/2026/03/03_Schoeberl.pdf">Talk Paris</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preconditioning+Implementation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.2-preconditioning/preconditioning.html">14. Preconditioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.2-preconditioning/implementing.html">15. Implementing FE</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Nonlinear Solids and Structures</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/linear_RM_shell_TDNNS.html">16. TDNNS method for Reissner-Mindlin shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/nonlinear_shells.html">17. Nonlinear Koiter and Naghdi shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/nonlinear_elasticity.html">18. Nonlinear elasticity with TDNNS and MCS</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_intro.html">19. Fluid-structure interaction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_TaylorHood.html">19.1. Fluid-structure interaction with Taylor-Hood elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_HDiv.html">19.2. Fluid-structure interaction with <span class="math notranslate nohighlight">\(H(\mathrm{div})\)</span>-conforming HDG</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extrinsic curvature</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.1-extrinsic_curvature/01_ddg_motivation.html">20. Extrinsic Curvature on a Triangulated Surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.1-extrinsic_curvature/02_numerical_examples.html">21. Numerical approximation of extrinsic curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.1-extrinsic_curvature/03_analysis_sketch.html">22. Analysis of the generalized and lifted shape operator</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Intrinsic curvature</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Gauss_Bonnet.html">23. Gauss-Bonnet Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_riemannian_manifolds.html">24. Riemannian Manifolds</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">25. Regge finite elements and Regge metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_distributional_gauss_curvature.html">26. Distributional Gauss curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_distributional_gauss_curvature_analysis.html">27. Distributional Gauss curvature (analysis)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_distributional_scalar_curvature.html">28. Distributional scalar curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_distributional_riemann_curvature_tensor.html">29. Distributional Riemann curvature tensor curvature</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/JSchoeberl/ESI-Elasticity-Geometry-NGSolve" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/unit-3.2-intrinsic_curvature/03_regge_metric.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Regge finite elements and Regge metrics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-of-regge-elements">25.1. History of Regge elements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regge-finite-element-construction">25.2. Regge finite element construction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-applications-of-regge-finite-elements">25.3. Further applications of Regge finite elements</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="regge-finite-elements-and-regge-metrics">
+<h1><span class="section-number">25. </span>Regge finite elements and Regge metrics<a class="headerlink" href="#regge-finite-elements-and-regge-metrics" title="Permalink to this heading">#</a></h1>
+<p>In this notebook, we discuss the Regge finite elements, which we will use to approximate the metric tensor of a (pseudo-)Riemannian manifold. We motivate that the Regge finite element space is the appropriate object to discretize the metric tensor, give some historical remarks, sketch their construction, and relate it to the function space <span class="math notranslate nohighlight">\(H(\mathrm{curl}\,\mathrm{curl})\)</span> associated to the incompatibility operator <span class="math notranslate nohighlight">\(\mathrm{inc}\)</span>.</p>
+<section id="history-of-regge-elements">
+<h2><span class="section-number">25.1. </span>History of Regge elements<a class="headerlink" href="#history-of-regge-elements" title="Permalink to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\((M,g)\)</span> be a (pseudo-)Riemannian manifold with <span class="math notranslate nohighlight">\(M\subset\mathbb{R}^N\)</span> and <span class="math notranslate nohighlight">\(g\)</span> the metric tensor with signature ++++ (positive definite in the Riemannian case) or -+++ (pseudo-Riemannian manifold). After discretizing the manifold’s domain <span class="math notranslate nohighlight">\(M\)</span> by a simplicial triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> (e.g., triangles in 2D and tetrahedra in 3D), we need to construct an approximation of the metric tensor <span class="math notranslate nohighlight">\(g\)</span> on this triangulation. It will turn out that the Regge finite element space is the correct object.</p>
+<p>A first intuitive way to approximate <span class="math notranslate nohighlight">\(g\)</span> on <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> is to assign to each edge <span class="math notranslate nohighlight">\(E_{ij}\)</span>, connecting two distinguished points <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span> of the triangulation, its squared lengths <span class="math notranslate nohighlight">\(l^2_{ij}\)</span> as measured by the metric <span class="math notranslate nohighlight">\(g\)</span>, i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+l^2_{ij}= \int_{E_{ij}}g(t_{E_{ij}},t_{E_{ij}})\,ds,
+\end{align*}
+\]</div>
+<center>
+<a class="reference internal image-reference" href="../_images/approx_metric_numbers.png"><img alt="../_images/approx_metric_numbers.png" src="../_images/approx_metric_numbers.png" style="width: 160px;" /></a>
+</center>
+<p>where <span class="math notranslate nohighlight">\(t_{E_{ij}}\)</span> denotes the unit tangent vector of the edge <span class="math notranslate nohighlight">\(E_{ij}\)</span>. Using the squared value, we can use negative numbers to account for pseudo-Riemannian manifolds appearing in general relativity. One may hope that this procedure yields a good approximation of the exact metric for a sequence of finer triangulations. With this idea Tullio Regge proposed in <a class="reference external" href="http://link.springer.com/10.1007/BF02733251">Regge. <em>General relativity without coordinates</em>. <em>Il Nuovo Cimento</em> (1961)</a> a method to solve numerical relativity in a coordinate-free way. From the edge lengths, he computed the angle defect (also called angle deficit) to approximate the curvature of the manifold. We will intensively discuss the concept of angle defect in the following notebooks. This method became popular under the name Regge calculus, see, e.g. <a class="reference external" href="https://arxiv.org/abs/1812.06193">Barret, Oriti, Wiliams. <em>Tullio Regge’s legacy: Regge calculus and discrete gravity</em>. <em>arXiv</em>, (2018).</a> for a review of Regge calculus. The first proof that this concept of an angle defect converges to the exact curvature was given in <a class="reference external" href="http://doi.org/10.1007/BF01210729">Cheeger, Müller, Schrader. On the curvature of piecewise flat spaces. <em>Communications in Mathematical Physics</em>, (1984).</a> by proving convergence in the sense of measures.</p>
+<p>Convergence in measures is weak. Furthermore, we would also like to use higher-order approximations of the exact one. To this end, we embed the above approach into a FEM context. First, it was recognized by Sorkin in <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevD.12.385">Sorkin. <em>Time-evolution problem in Regge calculus</em>. <em>Phys. Rev. D</em>, (1975).</a> that assigning length values is equivalent to defining a piecewise constant metric tensor: Let <span class="math notranslate nohighlight">\(l_{ij}^2\)</span> denote the value of the edge connecting vertices <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span>, <span class="math notranslate nohighlight">\(i\neq j\)</span>. Then there exists a unique piece-wise constant metric tensor <span class="math notranslate nohighlight">\(g_h\)</span> on the triangulation <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+g_{h,k\ell} (x_i-x_j)^k(x_i-x_j)^{\ell} = l^2_{ij},
+\end{align*}
+\]</div>
+<p>The above equation defines the metric <span class="math notranslate nohighlight">\(g_h\)</span>. Astonishingly, the metric <span class="math notranslate nohighlight">\(g_h\)</span> is not completely discontinuous over element interfaces: Let <span class="math notranslate nohighlight">\(F\)</span> be an <span class="math notranslate nohighlight">\(N-1\)</span>-dimensional facet of the triangulation and let <span class="math notranslate nohighlight">\(X,Y\)</span> be two vector fields living in <span class="math notranslate nohighlight">\(F\)</span>, i.e. they are tangential vector fields on <span class="math notranslate nohighlight">\(F\)</span>, <span class="math notranslate nohighlight">\(X,Y\in \mathfrak{X}(F)\)</span>. Then the values <span class="math notranslate nohighlight">\(g_h(X,Y)\)</span> measured by the piece-wise constant metric <span class="math notranslate nohighlight">\(g_h\)</span> on the two elements <span class="math notranslate nohighlight">\(T_L\)</span> and <span class="math notranslate nohighlight">\(T_R\)</span> connected by <span class="math notranslate nohighlight">\(F= T_L\cap T_R\)</span> coincide</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+{g_h}|_{T_L}(X,Y) = {g_h}|_{T_R}(X,Y),\qquad \forall X,Y\in\mathfrak{X}(F),\quad F=T_L \cap T_R.
+\end{align*}
+\]</div>
+<p>We call this property tangential-tangential continuity, or in short <span class="math notranslate nohighlight">\(tt\)</span>-continuity. Note that the components involve at least one normal vector jump in general.</p>
+<p>Christiansen <a class="reference external" href="https://doi.org/10.1007/s00211-011-0394-z">Christiansen. <em>On the linearization of Regge calculus</em>. <em>Numerische Mathematik</em>, (2011).</a> embedded Regge calculus into a FEM context with finite element exterior calculus (FEEC), similar to Whitney 1-forms were identified as Nedelec elements. In contrast to the tangential continuous Nedelec elements, which are a conforming subspace of <span class="math notranslate nohighlight">\(H(\mathrm{curl})=\{u\in L^2(\Omega,\mathbb{R}^N)\,:\, \mathrm{curl}(u)\in L^2\}\)</span>, Regge elements</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\mathrm{Reg_h^0}:=\left\{ \sigma_h\in \mathcal{P}^0(\mathcal{T},\mathbb{R}^{3\times 3}_{\mathrm{sym}})\,:\, \sigma_h \text{ is } tt\text{-continuous}\right\}
+\end{align*}
+\]</div>
+<p>are a slightly non-conforming subspace of the function space</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+H(\mathrm{curl}\,\mathrm{curl},\Omega)=\left\{\sigma \in L^2(\Omega,\mathbb{R}^{3\times 3}_{\mathrm{sym}})\,:\, \mathrm{inc}(\sigma):=\mathrm{curl}^T\mathrm{curl}(\sigma)\in H^{-1}(\Omega,\mathbb{R}^{3\times 3}_{\mathrm{sym}})\right\},
+\end{align*}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathrm{inc}\)</span> is the incompatibility operator. It is ``slightly non-conforming’’ because the required Sobolev embedding theorem fails to hold by an arbitrarily small <span class="math notranslate nohighlight">\(\varepsilon&gt;0\)</span>. In <a class="reference external" href="http://hdl.handle.net/11299/199048">Li. <em>Regge Finite Elements with Applications in Solid Mechanics and Relativity</em>. <em>PhD thesis</em>, (2018).</a> Li extended the Regge finite element space to arbitrary polynomial order, <span class="math notranslate nohighlight">\(\mathrm{Reg}_h^k\)</span>, and arbitrary dimensions <span class="math notranslate nohighlight">\(\Omega\subset \mathbb{R}^N\)</span> for simplicial triangulations. Regge finite elements for quadrilateral, hexahedra, and prisms have been defined in <a class="reference external" href="https://repositum.tuwien.at/handle/20.500.12708/17043">Neunteufel. <em>Mixed finite Element Methods For Nonlinear Continuum Mechanics and Shells</em>. <em>PhD thesis</em>, (2021)</a>.</p>
+</section>
+<section id="regge-finite-element-construction">
+<h2><span class="section-number">25.2. </span>Regge finite element construction<a class="headerlink" href="#regge-finite-element-construction" title="Permalink to this heading">#</a></h2>
+<p>We sketch the construction of Regge finite elements for triangles and tetrahedra. For other shapes, we refer to <a class="reference external" href="https://repositum.tuwien.at/handle/20.500.12708/17043">Neunteufel. <em>Mixed finite Element Methods For Nonlinear Continuum Mechanics and Shells</em>. <em>PhD thesis</em>, (2021).</a>. The degrees of freedom (DoFs) to construct globally tangential-tangential continuous functions are motivated by the edge lengths and their extensions to higher dimensional simplices. They read for polynomial order <span class="math notranslate nohighlight">\(k\)</span> on a tetrahedron <span class="math notranslate nohighlight">\(T\)</span> with according faces <span class="math notranslate nohighlight">\(F_i\)</span> and edges <span class="math notranslate nohighlight">\(E_i\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+&amp;\Psi^j_{E_i}: \sigma\mapsto \int_{E_i}\sigma(t_i,t_i)\,q_j\,dl,&amp;&amp;\qquad q_j\in\mathcal{P}^k(E_i),\\
+&amp;\Psi^j_{F_i}: \sigma\mapsto \int_{F_i}\sigma : Q_j\,da,&amp;&amp;\qquad Q_j\in\mathcal{P}^{k-1}(F_i, TF_i\odot TF_i),\\
+&amp;\Psi^j_{T}: \sigma\mapsto \int_{T}\sigma : Q_j\,dx,&amp;&amp;\qquad Q_j\in\mathcal{P}^{k-2}(T,\mathbb{R}^{3\times 3}_{\mathrm{sym}}),\\
+\end{align*}
+\end{split}\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(TF_i\odot TF_i\)</span> denotes the symmetric dyadic product of vectors in the tangent space of <span class="math notranslate nohighlight">\(F_i\)</span>. That means symmetric, matrix-valued polynomials, which are zero when multiplied with the normal vector from either side. Only the edge DoFs and the internal ones are required for a triangle.</p>
+<p>We can construct lowest order edge and bubble shape functions of a triangle with the barycentric coordinates <span class="math notranslate nohighlight">\(\lambda_1\)</span>, <span class="math notranslate nohighlight">\(\lambda_2\)</span>, <span class="math notranslate nohighlight">\(\lambda_3\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+ \varphi_{E_i} = \nabla \lambda_j\odot\nabla \lambda_k,\qquad t_j^\top\varphi_{E_i}t_j=c_i\delta_{ij},\qquad\qquad\varphi_{T_i} = \lambda_i\,\nabla \lambda_j\odot\nabla \lambda_k.
+\end{align*}
+\]</div>
+<p>For higher-order shape functions, one might augment these low-order functions by, e.g. linear independent Legendre and Jacobi polynomials. The construction for higher-dimensional simplices follows the same lines, for example, by constructing appropriate bubble functions. In the following figure, the DoFs are schematically sketched for some shapes.</p>
+<center>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../_images/hcurlcurl_0_trig_ref_1.jpg"><img alt="../_images/hcurlcurl_0_trig_ref_1.jpg" src="../_images/hcurlcurl_0_trig_ref_1.jpg" style="width: 120px;" /></a></p></td>
+<td><p><a class="reference internal" href="../_images/hcurlcurl_0_trig_ref_2.jpg"><img alt="../_images/hcurlcurl_0_trig_ref_2.jpg" src="../_images/hcurlcurl_0_trig_ref_2.jpg" style="width: 120px;" /></a></p></td>
+<td><p><a class="reference internal" href="../_images/hcurlcurl_0_tet_ref_1.jpg"><img alt="../_images/hcurlcurl_0_tet_ref_1.jpg" src="../_images/hcurlcurl_0_tet_ref_1.jpg" style="width: 130px;" /></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../_images/hcurlcurl_0_quad_ref_1.jpg"><img alt="../_images/hcurlcurl_0_quad_ref_1.jpg" src="../_images/hcurlcurl_0_quad_ref_1.jpg" style="width: 120px;" /></a></p></td>
+<td><p><a class="reference internal" href="../_images/hcurlcurl_0_hex_ref_1.jpg"><img alt="../_images/hcurlcurl_0_hex_ref_1.jpg" src="../_images/hcurlcurl_0_hex_ref_1.jpg" style="width: 120px;" /></a></p></td>
+<td><p><a class="reference internal" href="../_images/hcurlcurl_0_prism_ref_1.jpg"><img alt="../_images/hcurlcurl_0_prism_ref_1.jpg" src="../_images/hcurlcurl_0_prism_ref_1.jpg" style="width: 130px;" /></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</center>
+<p>The canonical Regge interpolant <span class="math notranslate nohighlight">\(\mathcal{I}_{Reg}^k\)</span> is defined by the requirement to preserve tangential-tangential moments at edges and inner moments</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+ &amp;\mathcal{I}_{Reg}^k:C^0(\Omega,\mathbb{R}^{2\times 2}_{\mathrm{sym}})\to \text{Reg}_h^k,\\
+ &amp;\int_{E}(g-\mathcal{I}_{Reg}^kg)_{tt}\,q\,dl = 0 \text{ for all } q\in \mathcal{P}^{k}(E),\\
+ &amp;\int_T(g-\mathcal{I}_{Reg}^kg) : Q\,da = 0 \text{ for all } Q\in \mathcal{P}^{k-1}(T,\mathbb{R}^{2\times 2}_{\mathrm{sym}})
+\end{align*}
+\end{split}\]</div>
+<p>and can easily be extended to higher dimensions.</p>
+</section>
+<section id="further-applications-of-regge-finite-elements">
+<h2><span class="section-number">25.3. </span>Further applications of Regge finite elements<a class="headerlink" href="#further-applications-of-regge-finite-elements" title="Permalink to this heading">#</a></h2>
+<p>Besides their essential contribution in discretizing the metric tensor of (pseudo-)Riemannian manifolds for curvature approximation and numerical relativity, Regge finite elements have been successfully used to discretize fields in elasticity.</p>
+<ul class="simple">
+<li><p>Avoiding membrane locking in (nonlinear) shell analysis by interpolating the membrane stresses into the Regge finite element space <a class="reference external" href="https://doi.org/10.1016/j.cma.2020.113524">Neunteufel, Schöberl. <em>Avoiding membrane locking with Regge interpolation</em>. <em>Computer Methods in Applied Mechanics and Engineering</em>, (2021).</a></p></li>
+<li><p>Linear and nonlinear elasticity (continuum mechanics) by discretizing the strain/stress tensor by Regge elements <a class="reference external" href="http://hdl.handle.net/11299/199048">Li. <em>Regge Finite Elements with Applications in Solid Mechanics and Relativity</em>. <em>PhD thesis</em>, (2018).</a>, <a class="reference external" href="https://doi.org/10.1137/110848189">Hauret, Hecht. <em>A discrete differential sequence for elasticity based upon continuous displacements</em>. <em>SIAM Journal on Scientific Computing</em>, (2013).</a>, <a class="reference external" href="https://doi.org/10.1016/j.cma.2021.113857">Neunteufel, Pechstein, Schöberl. <em>Three-field mixed finite element methods for nonlinear elasticity</em>. <em>Computer Methods in Applied Mechanics and Engineering</em>, (2021).</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./unit-3.2-intrinsic_curvature"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_riemannian_manifolds.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">24. </span>Riemannian Manifolds</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_distributional_gauss_curvature.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">26. </span>Distributional Gauss curvature</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-of-regge-elements">25.1. History of Regge elements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regge-finite-element-construction">25.2. Regge finite element construction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-applications-of-regge-finite-elements">25.3. Further applications of Regge finite elements</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By M. Neunteufel and J. Schöberl
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

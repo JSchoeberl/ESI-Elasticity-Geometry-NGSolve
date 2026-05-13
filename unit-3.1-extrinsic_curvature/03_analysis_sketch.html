@@ -1,0 +1,721 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>22. Analysis of the generalized and lifted shape operator &#8212; ESI mini-course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'unit-3.1-extrinsic_curvature/03_analysis_sketch';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="23. Gauss-Bonnet Theorem" href="../unit-3.2-intrinsic_curvature/01_Gauss_Bonnet.html" />
+    <link rel="prev" title="21. Numerical approximation of extrinsic curvature" href="02_numerical_examples.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../ESI-minicourse.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ESI mini-course</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../ESI-minicourse.html">
+                    ESI mini-course on Elasticity and Geometry
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Elasticity</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/modeling.html">1. Modeling Elasticity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity2D.html">1.5. Solving nonlinear Elasticity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.1-Modeling/linearized_elasticity.html">2. Linearized elasticity</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.1-Modeling/Gallery.html">3. Gallery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/elasticity3D.html">3.1. 3D Solid Mechanics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/twisted.html">3.2. Twisted beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/metamaterial.html">3.3. Meta material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/Isoparametric.html">3.4. Isoparametric Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.1-Modeling/dynamics.html">3.5. Elastodynamics with Newmark time-stepping</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/mixedmethods.html">4. Mixed Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/MixedLaplace.html">5. Mixed Methods for the Diffusion equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-1.2-Mixed/TDNNS.html">6. TDNNS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke.html">6.7. Cooke’s membrane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-1.2-Mixed/Cooke-hybrid.html">6.8. Hybrid TDNNS for Cooke’s membrane benchmark</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.2-Mixed/SchaeferTurek2d.html">7. Navier-Stokes with MCS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear plates and shells</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/derivation_plates_from_elasticity.html">8. Plates from 3D elasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/reissner_mindlin_plate_tdnns.html">9. Reissner-Mindlin plates with TDNNS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/kirchhoff_love_plate_hhj.html">10. Kirchhoff-Love plates with the Hellan-Herrmann-Johnson method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-1.3-plates/introducing_shells.html">11. Linear shells</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mapping of tensors</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.1-mapping/spacehdiv.html">12. The Function Space H(div)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/tesla-mcs.html">12.3. Tesla Valve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/morphing.html">12.4. Navier-Stokes on moving domains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/SurfaceSchaeferTurek.html">12.5. H(div)-conforming Navier-Stokes on Surfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/heavytop.html">12.6. Heavy top without kinematik constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.1-mapping/rotor.html">12.7. Elastodynamics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.1-mapping/basisfunctions.html">13. Basis functions</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://project.inria.fr/ranpdes/files/2026/03/03_Schoeberl.pdf">Talk Paris</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preconditioning+Implementation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.2-preconditioning/preconditioning.html">14. Preconditioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.2-preconditioning/implementing.html">15. Implementing FE</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Nonlinear Solids and Structures</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/linear_RM_shell_TDNNS.html">16. TDNNS method for Reissner-Mindlin shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/nonlinear_shells.html">17. Nonlinear Koiter and Naghdi shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-2.3-solids_structures/nonlinear_elasticity.html">18. Nonlinear elasticity with TDNNS and MCS</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_intro.html">19. Fluid-structure interaction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_TaylorHood.html">19.1. Fluid-structure interaction with Taylor-Hood elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-2.3-solids_structures/fsi_HDiv.html">19.2. Fluid-structure interaction with <span class="math notranslate nohighlight">\(H(\mathrm{div})\)</span>-conforming HDG</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extrinsic curvature</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_ddg_motivation.html">20. Extrinsic Curvature on a Triangulated Surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_numerical_examples.html">21. Numerical approximation of extrinsic curvature</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">22. Analysis of the generalized and lifted shape operator</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Intrinsic curvature</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/01_Gauss_Bonnet.html">23. Gauss-Bonnet Theorem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/02_riemannian_manifolds.html">24. Riemannian Manifolds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/03_regge_metric.html">25. Regge finite elements and Regge metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/04_distributional_gauss_curvature.html">26. Distributional Gauss curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/05_distributional_gauss_curvature_analysis.html">27. Distributional Gauss curvature (analysis)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/06_distributional_scalar_curvature.html">28. Distributional scalar curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../unit-3.2-intrinsic_curvature/07_distributional_riemann_curvature_tensor.html">29. Distributional Riemann curvature tensor curvature</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/JSchoeberl/ESI-Elasticity-Geometry-NGSolve" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/unit-3.1-extrinsic_curvature/03_analysis_sketch.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analysis of the generalized and lifted shape operator</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-comparison-problem">22.1. The comparison problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-connect-the-two-surfaces-by-interpolation-of-embeddings">22.2. Step 1: connect the two surfaces by interpolation of embeddings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-linearization">22.3. Step 2: Linearization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-pull-everything-back">22.4. Step 3: pull everything back</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-generalized-shape-operator">22.5. Analysis of generalized shape operator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-lifted-generalized-weingarten-tensor">22.6. Analysis of lifted generalized Weingarten tensor</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analysis-of-the-generalized-and-lifted-shape-operator">
+<h1><span class="section-number">22. </span>Analysis of the generalized and lifted shape operator<a class="headerlink" href="#analysis-of-the-generalized-and-lifted-shape-operator" title="Permalink to this heading">#</a></h1>
+<p>In this notebook we will provide a proof roadmap on how to rigorously analyze the generalized and lifted Weingarten tensor using numerical analysis and derive convergence rates. We follow [Gopalakrishnan, Neunteufel. Analysis of the generalized shape operator for surfaces (in preparation)].</p>
+<style>
+.curv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; align-items: start; }
+.curv-fig { margin: 0; }
+.curv-fig img { width: 100%; border-radius: 6px; }
+.curv-fig figcaption { font-size: 0.9rem; color: #555; margin-top: 0.35rem; }
+.curv-callout { border-left: 4px solid #386cb0; padding: 0.65rem 0.9rem; background: #f6f8fb; margin: 1rem 0; }
+.curv-eqbox { border: 1px solid #d6dbe6; border-radius: 6px; padding: 0.8rem 1rem; background: #fbfcff; }
+</style>
+<section id="the-comparison-problem">
+<h2><span class="section-number">22.1. </span>The comparison problem<a class="headerlink" href="#the-comparison-problem" title="Permalink to this heading">#</a></h2>
+<p>The exact shape operator and the discrete lifted shape operator do not naturally live on the same surface. Also, there are several difficulties we have to take care of:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W\)</span> lives on the smooth surface <span class="math notranslate nohighlight">\(\mathcal S\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\kappa_h\)</span> lives on the discrete surface <span class="math notranslate nohighlight">\(\mathcal S_h\)</span>,</p></li>
+<li><p>the generalized operator is a distributional functional,</p></li>
+<li><p>the involved quantities (e.g. the signed dihedral angle) are highly nonlinear.</p></li>
+</ul>
+<p>During the analysis we need to compare functionals across changing geometries.</p>
+<center>
+<a class="reference internal image-reference" href="../_images/embedding.png"><img alt="../_images/embedding.png" src="../_images/embedding.png" style="width: 300px;" /></a>
+</center>
+</section>
+<section id="step-1-connect-the-two-surfaces-by-interpolation-of-embeddings">
+<h2><span class="section-number">22.2. </span>Step 1: connect the two surfaces by interpolation of embeddings<a class="headerlink" href="#step-1-connect-the-two-surfaces-by-interpolation-of-embeddings" title="Permalink to this heading">#</a></h2>
+<p>Introduce a family of embeddings</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_h^t = \bar{\Phi}_h + t(\Phi_h - \bar{\Phi}_h),
+\qquad 0\le t\le 1,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bar{\Phi}_h:\hat{\Omega}\to\mathcal{S}\)</span> and <span class="math notranslate nohighlight">\(\Phi_h:\hat{\Omega}\to\mathcal{S}_h\)</span> are the embeddings of the exact and approximated surface living on the same reference/parameter domain <span class="math notranslate nohighlight">\(\hat{\Omega}\subset \mathbb{R}^2\)</span>.</p>
+<center>
+<a class="reference internal image-reference" href="../_images/embedding_common.png"><img alt="../_images/embedding_common.png" src="../_images/embedding_common.png" style="width: 400px;" /></a>
+</center>
+<p>This connects the exact triangulated surface to the discrete surface. The error is then written with the fundamental theorem of calculus into an integral formulation</p>
+<div class="math notranslate nohighlight">
+\[
+\widetilde W_h(\sigma_h) - \tilde{\bar{W}}_h(\sigma)
+= \int_0^1 \frac{d}{dt}\widetilde W(\Phi_h^t)(\sigma_t)\,dt .
+\]</div>
+<p>Note, that <span class="math notranslate nohighlight">\(\tilde{\bar{W}}_h(\sigma) = \int_{\mathcal{S}}\bar{W}:\sigma\)</span>.</p>
+<p>It is important to note, that we have to pull back <strong>all</strong> quantities back to the common parameter domain <span class="math notranslate nohighlight">\(\hat{\Omega}\)</span>, including the test functions <span class="math notranslate nohighlight">\(\sigma\)</span> in the Hellan-Herrmann-Johnson space.</p>
+<p>Thus, in a first intermediate step, we need to investigate how the generalized Weingarten tensor behaves, if the surface (more precisely its embedding) varies.</p>
+</section>
+<section id="step-2-linearization">
+<h2><span class="section-number">22.3. </span>Step 2: Linearization<a class="headerlink" href="#step-2-linearization" title="Permalink to this heading">#</a></h2>
+<p>Denote with <span class="math notranslate nohighlight">\(\hat X=\frac{d}{dt}\Phi_h^t\)</span> the perturbation vector of the surface and define <span class="math notranslate nohighlight">\(X_t\circ\Phi_h^t=\hat{X}\)</span>. Further, define <span class="math notranslate nohighlight">\(F=\hat{\nabla} \hat X\)</span>, <span class="math notranslate nohighlight">\(J=\sqrt{\det(F^TF)}\)</span>.</p>
+<p>Similar to shape optimization techniques, we can compute how the involved quantities change:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+	&amp;\frac{d}{dt} J = (\mathrm{div}_{\mathcal{S}} X)\circ\Phi\,J &amp;&amp; \text{surface determinant}\\
+	&amp;\frac{d}{dt}(\nu\circ\Phi) = -((\nabla_{\mathcal{S}}X)^T\nu)\circ\Phi &amp;&amp; \text{surface normal}\\
+	&amp;\frac{d}{dt}({\sigma}\circ\Phi) = (-2\mathrm{div}_{\mathcal{S}}(X){\sigma}+2\mathrm{sym}(\nabla_{\mathcal{S}}X{\sigma}))\circ\Phi &amp;&amp; \text{HHJ test function}\\
+	&amp;\frac{d}{dt}({\sigma}_{\mu\mu}\circ\Phi) = (-2(\nabla_{\mathcal{S}}X)_{\tau\tau}{\sigma}_{\mu\mu})\circ\Phi\\
+	&amp;\frac{d}{dt}(\nabla_{\mathcal{S}}\nu\circ\Phi) = \left(\sum_{i=1}^3\nu_i\nabla_{\mathcal{S}}\nabla_{\mathcal{S}}X_i-(\nabla_{\mathcal{S}}X)^T\nabla_{\mathcal{S}}\nu + \nabla_{\mathcal{S}}\nu((\nabla_{\mathcal{S}}X^T\nu)\otimes\nu -\nabla_{\mathcal{S}}X)\right)\circ\Phi &amp;&amp; \text{Weingarten tensor}\\
+	&amp;\frac{d}{dt}(\sphericalangle_{\mathrm{sgn}}(\nu_L,\nu_R)\circ\Phi) = [\![ (\nabla_{\mathcal{S}}X)_{\nu\mu}]\!]\circ\Phi &amp;&amp; \text{dihedral angle}
+\end{align*}
+\end{split}\]</div>
+<p>Thus, we derive at the following linearization of the generalized shape operator</p>
+<div class="math notranslate nohighlight">
+\[
+\widetilde{W}({\sigma})=
+\sum_{T\in\mathcal T}\int_T W_T:\sigma\,ds+\sum_{E\in\mathcal E_{\rm int}}\int_E \sphericalangle_{\mathrm{sgn}}(\nu_L,\nu_R)\,\sigma_{\mu\mu}\,dl
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(X=\dot{X}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+        \frac{d}{dt}\widetilde{W}({\sigma}) = a(\Phi;{\sigma},X)+b(\Phi;{\sigma},X),
+\end{align*}
+\]</div>
+<p>where with <span class="math notranslate nohighlight">\(\mathcal{H}_{\nu}(X) = \sum_{i=1}^3\mathrm{hesse}(X_i)\nu_i\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+        a(\Phi;{\sigma},X) &amp;= \sum_{T\in \mathcal{T}}\int_T-\mathrm{div}(X)\nabla\nu:{\sigma} -\sum_{E\in\mathring{\mathcal{E}}}\int_E(\nabla X)_{\tau\tau}\sphericalangle_{\mathrm{sgn}}(\nu_L,\nu_R){\sigma}_{\mu\mu},\\
+        b(\Phi;{\sigma},X) &amp;= \sum_{T\in\mathcal{T}}\int_T-\mathcal{H}_{\nu}(X):{\sigma} + \sum_{E\in\mathring{\mathcal{E}}}\int_E[\![ (\nabla X)_{\nu\mu} ]\!]_E{\sigma}_{\mu\mu}.
+\end{align*}
+\end{split}\]</div>
+<p>The first bilinear form, <span class="math notranslate nohighlight">\(a(\cdot;\cdot,\cdot)\)</span> only contains first derivatives of <span class="math notranslate nohighlight">\(X\)</span> and the boundary term involving <span class="math notranslate nohighlight">\(X\)</span> is single-valued. The second bilinear for <span class="math notranslate nohighlight">\(b(\cdot;\cdot,\cdot)\)</span> contains bending-type terms involving second derivatives of <span class="math notranslate nohighlight">\(X\)</span> and is closely related to the HHJ method for Kirchhoff-Love shell bending. That is the analytic echo of the finite element choice and will be exploited in the numerical analysis.</p>
+</section>
+<section id="step-3-pull-everything-back">
+<h2><span class="section-number">22.4. </span>Step 3: pull everything back<a class="headerlink" href="#step-3-pull-everything-back" title="Permalink to this heading">#</a></h2>
+<p>As motivated above we need to transform both bilinear forms back to the parameter domain <span class="math notranslate nohighlight">\(\hat \Omega\)</span> to perform the analysis.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+		a(\Phi;{\sigma},X) &amp;= \sum_{\hat{T}\in \hat{\mathcal{T}}}\int_{\hat{T}}-J^{-1}\mathrm{tr}(\hat{\nabla}\hat{X} F^{\dagger})\hat{S}:{\hat{\sigma}} -\sum_{\hat{E}\in\mathring{\hat{\mathcal{E}}}}\int_{\hat{E}}J_{\mathrm{bnd}}^{-3}(\hat{\nabla}_{\hat{\tau}} \hat{X})\cdot (F\hat{\tau})\sphericalangle_{\mathrm{sgn}}(\nu_L,\nu_R)\circ\Phi{\hat{\sigma}}_{\hat{\mu}\hat{\mu}},\\
+        b(\Phi;{\sigma},X) &amp;= \sum_{\hat{T}\in \hat{\mathcal{T}}}\int_{\hat{T}}-\sum_{i=1}^3J^{-1}(F_1\times F_2)\left(\hat{\nabla}^2\hat{X}_i-\sum_{\alpha=1}^2(\hat{\nabla}_{\alpha}\hat{X}_i){\Gamma}^{\alpha}\right):{\hat{\sigma}} \\
+		&amp;\quad+ \sum_{\hat{E}\in\mathring{\hat{\mathcal{E}}}}\int_{\hat{E}}[\![ \sum_{i=1}^3J^{-1}(F_1\times F_2)\cdot\left(\hat{\nabla}_{\hat{\mu}}\hat{X}_i-J_{\mathrm{bnd}}^2(F^TF)_{\hat{\tau}\hat{\mu}}\hat{\nabla}_{\hat{\tau}}\hat{X}_i\right) ]\!]_E{\hat{\sigma}}_{\hat{\mu}\hat{\mu}}.
+\end{align*}
+\end{split}\]</div>
+<p>Above, we used the notation of the Christoffel symbols of second kind: <span class="math notranslate nohighlight">\({\Gamma}^{\alpha}_{\beta\gamma} = \sum_{\ell=1}^3F^{\dagger}_{\alpha\ell}\hat{\nabla}_{\beta}F_{\ell \gamma}\)</span>. Further, <span class="math notranslate nohighlight">\(\hat{S}=\sum_{i=1}^3\nu_i\circ\Phi\hat{\nabla}^2 \Phi_i\)</span> arises from the pull-back of the Weingarten tensor <span class="math notranslate nohighlight">\(\nabla_{\mathcal{S}}\nu\circ\Phi = F^{\dagger^T}\hat{S} F^{\dagger}\)</span>. The HHJ test function <span class="math notranslate nohighlight">\(\sigma\)</span> is transformed by the double Piola transformation <span class="math notranslate nohighlight">\({\sigma}\circ\Phi = J^{-2}F{\hat{\sigma}} F^T\)</span> and the normal vector reads <span class="math notranslate nohighlight">\(\nu\circ\Phi = J^{-1}F_1\times F_2\)</span>.</p>
+</section>
+<section id="analysis-of-generalized-shape-operator">
+<h2><span class="section-number">22.5. </span>Analysis of generalized shape operator<a class="headerlink" href="#analysis-of-generalized-shape-operator" title="Permalink to this heading">#</a></h2>
+<p>The <span class="math notranslate nohighlight">\(H^{-1}\)</span>-norm is well-suited for the analysis of the generalized shape operator as it consists of volume and codimension 1 facet (edge) contributions. Thus we will estimate</p>
+<div class="math notranslate nohighlight">
+\[
+\widetilde W_h(\sigma_h) - \tilde{\bar{W}}_h(\sigma)
+= \int_0^1 \left(a(\Phi_t;X_t,\sigma_t) + b(\Phi_t;X_t,\sigma_t)\right)\,dt,
+\]</div>
+<p>by estimating the integrand, which are sufficiently linear to perform numerical analysis. Goal: estimate to get <span class="math notranslate nohighlight">\(|a(\Phi_t;X_t,\sigma_t)|\le C \|\hat X\|\|\hat \sigma\|_{H^1}\)</span> and <span class="math notranslate nohighlight">\(|b(\Phi_t;X_t,\sigma_t)|\le C \|\hat X\|\|\hat \sigma\|_{H^1}\)</span> with the weakest norm for <span class="math notranslate nohighlight">\(\hat X\)</span> as possible as <span class="math notranslate nohighlight">\(\hat X=\Phi_h-\bar{\Phi}_h\)</span> gives the convergence.</p>
+<p>It is crucial to carefully estimate the involved nonlinear terms. For example one can proof for the signed dihedral angle that</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\|\sphericalangle_{\mathrm{sgn}}(\nu_L,\nu_R)\|_{W^{1,\infty}}\le h\|\bar{\Phi}_h\|_{W^{\min\{k,2\},\infty}}.
+\end{align*}
+\]</div>
+<p>We arrive at the following result
+Let <span class="math notranslate nohighlight">\((\Phi_h)_{h&gt;0}\in\mathrm{Lag}^k_h\)</span> be a family of embeddings such that <span class="math notranslate nohighlight">\(\|\Phi_h-\bar{\Phi}_h\|_{W^{1,\infty}}\!\to\! 0\)</span>. Then there holds</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+		\|\widetilde{W}-\bar{W}\|_{H^{-1}} \le C(1+\max\limits_{\hat{T}\in\hat{\mathcal{T}}}h^{-1}_{\hat{T}}\|\Phi_h-\bar{\Phi}_h\|_{W^{\min\{k,2\},\infty}(\hat{T})})\|\Phi_h-\bar{\Phi}_h\|_{H^1}.
+\end{align*}
+\]</div>
+<p>If the embedding <span class="math notranslate nohighlight">\(\Phi_h\)</span> has optimal approximation properties, we obtain the following convergence result</p>
+<div class="math notranslate nohighlight">
+\[
+\|\widetilde{W}-\bar{W}\|_{H^{-1}} \le C\,h^k.
+\]</div>
+<p>Thus, we have shown that the dihedral angle used in discrete differential geometry always converges in the <span class="math notranslate nohighlight">\(H^{-1}\)</span>-norm.</p>
+</section>
+<section id="analysis-of-lifted-generalized-weingarten-tensor">
+<h2><span class="section-number">22.6. </span>Analysis of lifted generalized Weingarten tensor<a class="headerlink" href="#analysis-of-lifted-generalized-weingarten-tensor" title="Permalink to this heading">#</a></h2>
+<p>Next, we investigate the convergence of the lifted generalized Weingarten tensor</p>
+<div class="math notranslate nohighlight">
+\[
+(\kappa_h,\tau_h)_{L^2(\mathcal T_h)}
+=
+\widetilde W_h(\tau_h).
+\]</div>
+<p>For an optimal order interpolant <span class="math notranslate nohighlight">\(\Phi_h\)</span> of <span class="math notranslate nohighlight">\(\bar{\Phi}_h\)</span> we get the same convergence result: Let <span class="math notranslate nohighlight">\((\Phi_h)_{h&gt;0}\in\mathrm{Lag}^k_h\)</span> be a family of embeddings and <span class="math notranslate nohighlight">\({\kappa}_h\in M_h^{k-1}\)</span> be the lifted Weingarten tensor. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\|{\kappa}_h-\bar{W}\|_{H^{-1}} \le C\,h^{k+1}.
+\]</div>
+<p>Note, that we need the technical assumption of a quasi-uniform triangulation as we use an <span class="math notranslate nohighlight">\(H^1\)</span>-like stability of an <span class="math notranslate nohighlight">\(L^2\)</span>-like projection operator including a global inverse estimate.</p>
+<p>However, we can improve the convergence rates if the approximated surface comes from the canonical Lagrange interpolation operator, <span class="math notranslate nohighlight">\(\Phi_h= \mathcal{I}^{\mathrm{Lag}^k}_h\bar{\Phi}_h\)</span>. This includes the important case of densely inscribed surfaces, i.e., the vertices of the triangulation lie on the exact surface. The key ingredient for the improved convergence is the magic orthogonality condition of the HHJ bilinear form</p>
+<div class="math notranslate nohighlight">
+\[
+b(\sigma_h, u-\mathcal{I}^{\mathrm{Lag}^k}_hu)=0,\qquad \forall \sigma_h \in M_h^{k-1},
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+b(\sigma, u) = \sum_T\int_T\sigma:\nabla^2 u\,dx -\int_{\partial T} \sigma_{nn}\partial_nu\,ds = \sum_T\int_T\mathrm{div}\mathrm{div}\sigma\, u\,dx -\int_{\partial T} (\mathrm{div}\sigma + \partial_t\sigma_{nt}\,)u\,ds +\sum_{V\in T} [\![\sigma_{nt}]\!]_V^T\,u(V).
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\((\Phi_h)_{h&gt;0}\in\mathrm{Lag}^k_h\)</span> be a family of embeddings such that <span class="math notranslate nohighlight">\(\Phi_h= \mathcal{I}^{\mathrm{Lag}^k}_h\bar{\Phi}_h\)</span> for <span class="math notranslate nohighlight">\(k\ge 1\)</span>. Let <span class="math notranslate nohighlight">\({\kappa}_h\in M_h^{k-1}\)</span> be the lifted Weingarten tensor. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\|{\kappa}_h-\bar{W}\|_{H^{-1}} \le C\,h^{\textcolor{red}{k+1}}.
+\]</div>
+<p>By using standard techniques, we can derive estimates in stronger norms, loosing the expected <span class="math notranslate nohighlight">\(h\)</span> powers. Thus, we have shown that the lifted Weingarten tensor always converges in the <span class="math notranslate nohighlight">\(L^2\)</span> norm, if the approximation stems from the canonical Lagrange interpolation operator.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./unit-3.1-extrinsic_curvature"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_numerical_examples.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">21. </span>Numerical approximation of extrinsic curvature</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../unit-3.2-intrinsic_curvature/01_Gauss_Bonnet.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">23. </span>Gauss-Bonnet Theorem</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-comparison-problem">22.1. The comparison problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-connect-the-two-surfaces-by-interpolation-of-embeddings">22.2. Step 1: connect the two surfaces by interpolation of embeddings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-linearization">22.3. Step 2: Linearization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-pull-everything-back">22.4. Step 3: pull everything back</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-generalized-shape-operator">22.5. Analysis of generalized shape operator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-lifted-generalized-weingarten-tensor">22.6. Analysis of lifted generalized Weingarten tensor</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By M. Neunteufel and J. Schöberl
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
